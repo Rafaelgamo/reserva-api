@@ -30,7 +30,7 @@ public class ReservaService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-
+    @Transactional
     public Long criarReserva(ReservaDTO reservaDTO) {
 
         var idRestaurante = reservaDTO.idRestaurante();
@@ -45,6 +45,7 @@ public class ReservaService {
         usuario.setId(idUsuario);
 
         var reserva = new Reserva();
+
         reserva.setRestaurante(restaurante);
         reserva.setUsuario(usuario);
         reserva.setQuantidade(reservaDTO.quantidade());
@@ -56,15 +57,10 @@ public class ReservaService {
 
     }
 
-
-    public List<Reserva> findAll(){
-        return reservaRepository.findAll();
+    @Transactional
+    public Page<ReservaDTO> listarTodos(Pageable paginacao) {
+        return reservaRepository.findAll(paginacao).map(ReservaDTO::new);
     }
 
 
-
-    public Reserva findById(Long id) {
-        return reservaRepository.findById(id).get();
-
-    }
 }

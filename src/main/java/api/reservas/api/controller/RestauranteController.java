@@ -22,25 +22,20 @@ public class RestauranteController {
 
         @PostMapping
         public ResponseEntity cadastro(@RequestBody RestauranteDTO restauranteDTO){
-        var idCadastro = restauranteService.cadastroRestaurante(restauranteDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new Restaurante());
+                var idCadastro = restauranteService.cadastroRestaurante(restauranteDTO);
+                return ResponseEntity.status(HttpStatus.CREATED).body(new Restaurante());
         }
 
 
         @GetMapping
         public ResponseEntity<Page<RestauranteDTO>> listar(@PageableDefault(size =10) Pageable paginacao){
-            var page = restauranteService.listarTodos(paginacao);
-            return ResponseEntity.ok(page);
+                var page = restauranteService.listarTodos(paginacao);
+                return ResponseEntity.ok(page);
         }
 
 
 
 }
-
-
-
-
-
 
 
 

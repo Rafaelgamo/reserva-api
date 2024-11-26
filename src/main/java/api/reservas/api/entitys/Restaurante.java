@@ -1,8 +1,6 @@
 package api.reservas.api.entitys;
 
 
-
-import api.reservas.api.dto.CreatedEntityiDTO;
 import jakarta.persistence.*;
 
 @Entity
@@ -18,7 +16,7 @@ public class Restaurante  {
     private String funcionamento;
     private Integer capacidade;
 
-     public Restaurante(){}
+    public Restaurante(){}
 
 
 
