@@ -8,7 +8,6 @@ import org.springframework.data.web.config.EnableSpringDataWebSupport;
 public record UsuarioDTO(
         Long id,
         String nome,
-
         String telefone
 ) {
 

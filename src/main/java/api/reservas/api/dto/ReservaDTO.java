@@ -2,10 +2,7 @@ package api.reservas.api.dto;
 
 
 import api.reservas.api.entitys.Reserva;
-import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
-
-@EnableSpringDataWebSupport
 public record ReservaDTO(
         Long idRestaurante,
         Long idUsuario,

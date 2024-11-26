@@ -36,10 +36,8 @@ public class ReservaService {
         var idRestaurante = reservaDTO.idRestaurante();
         var idUsuario = reservaDTO.idUsuario();
 
-
         var restaurante = new Restaurante();
         restaurante.setId(idRestaurante);
-
 
         var usuario = new Usuario();
         usuario.setId(idUsuario);

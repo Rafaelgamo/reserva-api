@@ -2,6 +2,8 @@ package api.reservas.api.services;
 
 import api.reservas.api.dto.UsuarioDTO;
 import api.reservas.api.entitys.Usuario;
+import api.reservas.api.infra.errors.exceptions.EntidadeJaExiste;
+import api.reservas.api.infra.errors.exceptions.ErroDeValidacao;
 import api.reservas.api.repository.UsuarioRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +26,21 @@ public class UsuarioService {
         usuario.setNome(dados.nome());
         usuario.setTelefone(dados.telefone());
 
+        boolean usuarioJaCadastrado = usuarioRepository.existsByNome(nome);
+        if (usuarioJaCadastrado) {
+            throw new EntidadeJaExiste(Usuario.class, "nome", nome);
+        }
+
+        boolean telefoneJaCadastrado = usuarioRepository.existsByTelefone(telefone);
+        if(telefoneJaCadastrado){
+            throw new EntidadeJaExiste(Usuario.class, "telefone", telefone);
+        }
+
         var usuarioSalvo = usuarioRepository.save(usuario);
+        if (usuarioSalvo == null) {
+            throw new ErroDeValidacao("Erro ao cadastrar usuario");
+        }
+
         return  usuarioSalvo.getId();
     }
 

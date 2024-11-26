@@ -2,6 +2,9 @@ package api.reservas.api.services;
 
 import api.reservas.api.dto.RestauranteDTO;
 import api.reservas.api.entitys.Restaurante;
+import api.reservas.api.entitys.Usuario;
+import api.reservas.api.infra.errors.exceptions.EntidadeJaExiste;
+import api.reservas.api.infra.errors.exceptions.ErroDeValidacao;
 import api.reservas.api.repository.RestauranteRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,7 +36,16 @@ public class RestauranteService {
         restaurante.setFuncionamento(dados.funcionamento());
         restaurante.setCapacidade(dados.capacidade());
 
+        boolean restauranteJaCadastrado = restauranteRepository.existsByEndereco(endereco);
+        if (restauranteJaCadastrado) {
+            throw new EntidadeJaExiste(Restaurante.class, "endereco", endereco);
+        }
+
         var restauranteSalvo = restauranteRepository.save(restaurante);
+        if (restauranteSalvo == null) {
+            throw new ErroDeValidacao("Erro ao cadastrar restaurante");
+        }
+
         return restauranteSalvo.getId();
     }
 
@@ -42,9 +54,6 @@ public class RestauranteService {
         return restauranteRepository.findAll(paginacao).map(RestauranteDTO::new);
     }
 
-    @Transactional
-    public Optional<RestauranteDTO> findById(Long id) {
-        return restauranteRepository.findById(id).map(RestauranteDTO::new);
-    }
+
 
 }
