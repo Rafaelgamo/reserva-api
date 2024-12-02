@@ -1,6 +1,7 @@
 package api.reservas.api.dto;
 
 
+import api.reservas.api.Enum.DiasDaSemana;
 import api.reservas.api.entitys.Restaurante;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
@@ -11,7 +12,8 @@ public record RestauranteDTO(
         String endereco,
         String tipodecozinha,
         String funcionamento,
-        Integer capacidade
+        Integer capacidade,
+        Boolean ativo
 ){
         public RestauranteDTO(Restaurante restaurante) {
                 this(
@@ -20,7 +22,9 @@ public record RestauranteDTO(
                         restaurante.getEndereco(),
                         restaurante.getTipodecozinha(),
                         restaurante.getFuncionamento(),
-                        restaurante.getCapacidade());
+                        restaurante.getCapacidade(),
+                        restaurante.getAtivo()
+                );
         }
 
 }

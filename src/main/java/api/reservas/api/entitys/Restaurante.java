@@ -1,6 +1,8 @@
 package api.reservas.api.entitys;
 
 
+import api.reservas.api.Enum.DiasDaSemana;
+import api.reservas.api.dto.RestauranteDTO;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,11 +17,20 @@ public class Restaurante  {
     private String tipodecozinha;
     private String funcionamento;
     private Integer capacidade;
+    private Boolean ativo;
 
     public Restaurante(){}
 
+    public Restaurante(RestauranteDTO dados){
+        this.id = dados.id();
+        this.nome = dados.nome();
+        this.endereco = dados.endereco();
+        this.tipodecozinha = dados.tipodecozinha();
+        this.funcionamento = dados.funcionamento();
+        this.capacidade = dados.capacidade();
+        this.ativo = true;
 
-
+    }
 
     public void setId(Long id){ this.id = id; }
     public Long getId(){ return this.id; }
@@ -39,6 +50,7 @@ public class Restaurante  {
     public void setCapacidade(int capacidade){ this.capacidade = capacidade; }
     public Integer getCapacidade(){ return this.capacidade; }
 
-
+    public void setAtivo(Boolean ativo){ this.ativo = ativo; }
+    public Boolean getAtivo(){ return this.ativo; }
 
 }

@@ -15,7 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -48,10 +47,10 @@ public class ReservaService {
         reserva.setUsuario(usuario);
         reserva.setQuantidade(reservaDTO.quantidade());
         reserva.setHorario(reservaDTO.horario());
+        reserva.setAtivo(true);
 
         var reservaSalva = reservaRepository.save(reserva);
         return reservaSalva.getId();
-
 
     }
 
@@ -60,5 +59,10 @@ public class ReservaService {
         return reservaRepository.findAll(paginacao).map(ReservaDTO::new);
     }
 
+    @Transactional
+    public void cancelarReserva(Long id) {
+        Optional<Reserva> reserva = reservaRepository.findById(id);
+        reserva.ifPresent(value -> value.setAtivo(false));
+    }
 
 }

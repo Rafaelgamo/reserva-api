@@ -2,10 +2,8 @@ package api.reservas.api.services;
 
 import api.reservas.api.dto.RestauranteDTO;
 import api.reservas.api.entitys.Restaurante;
-import api.reservas.api.entitys.Usuario;
-import api.reservas.api.infra.errors.exceptions.EntidadeJaExiste;
-import api.reservas.api.infra.errors.exceptions.ErroDeValidacao;
 import api.reservas.api.repository.RestauranteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,7 +14,7 @@ import java.util.Optional;
 @Service
 public class RestauranteService {
 
-
+    @Autowired
     private final RestauranteRepository restauranteRepository;
 
     public RestauranteService(RestauranteRepository restauranteRepository){ this.restauranteRepository = restauranteRepository;}
@@ -35,16 +33,11 @@ public class RestauranteService {
         restaurante.setTipodecozinha(dados.tipodecozinha());
         restaurante.setFuncionamento(dados.funcionamento());
         restaurante.setCapacidade(dados.capacidade());
+        restaurante.setAtivo(true);
 
         boolean restauranteJaCadastrado = restauranteRepository.existsByEndereco(endereco);
-        if (restauranteJaCadastrado) {
-            throw new EntidadeJaExiste(Restaurante.class, "endereco", endereco);
-        }
 
         var restauranteSalvo = restauranteRepository.save(restaurante);
-        if (restauranteSalvo == null) {
-            throw new ErroDeValidacao("Erro ao cadastrar restaurante");
-        }
 
         return restauranteSalvo.getId();
     }
@@ -54,6 +47,11 @@ public class RestauranteService {
         return restauranteRepository.findAll(paginacao).map(RestauranteDTO::new);
     }
 
+    @Transactional
+    public void removerRestaurante(Long id) {
+        Optional<Restaurante> restaurante = restauranteRepository.findById(id);
+        restaurante.ifPresent(value -> value.setAtivo(false));
+    }
 
 
 }
