@@ -1,7 +1,7 @@
 package api.reservas.api.entitys;
 
-import api.reservas.api.Enum.NotaAvaliacao;
 import api.reservas.api.dto.AvaliacaoDTO;
+import api.reservas.api.enums.NotaAvaliacao;
 
 public class Avaliacao {
 

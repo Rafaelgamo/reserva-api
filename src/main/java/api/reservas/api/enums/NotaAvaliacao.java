@@ -1,4 +1,4 @@
-package api.reservas.api.Enum;
+package api.reservas.api.enums;
 
 public enum NotaAvaliacao {
         UM(1, "Ruim"),
@@ -24,7 +24,7 @@ public enum NotaAvaliacao {
             return descricao;
         }
 
-        public static NotaAvaliacao fromInt(int i) {
+        public static NotaAvaliacao forId(int i) {
             for (NotaAvaliacao nota : NotaAvaliacao.values()) {
                 if (nota.getValor() == i) {
                     return nota;

@@ -1,7 +1,6 @@
 package api.reservas.api.dto;
 
 
-import api.reservas.api.Enum.DiasDaSemana;
 import api.reservas.api.entitys.Restaurante;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
