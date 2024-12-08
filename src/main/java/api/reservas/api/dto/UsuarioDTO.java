@@ -8,14 +8,18 @@ import org.springframework.data.web.config.EnableSpringDataWebSupport;
 public record UsuarioDTO(
         Long id,
         String nome,
-        String telefone
+        String telefone,
+        Boolean ativo
 ) {
 
     public UsuarioDTO(Usuario usuario){
         this(
                 usuario.getId(),
                 usuario.getNome(),
-                usuario.getTelefone());
+                usuario.getTelefone(),
+                usuario.getAtivo()
+
+                );
     }
 
 }
