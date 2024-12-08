@@ -8,11 +8,11 @@
 		<version>3.3.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>api.reservas</groupId>
-	<artifactId>api.reservas</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>api.reservas</name>
-	<description>api de reservas de mesas para restaurante </description>
+	<groupId>fiap.postech.grupo14</groupId>
+	<artifactId>reservas</artifactId>
+	<version>0.0.1</version>
+	<name>reserva-api</name>
+	<description>api de reservas de mesas para restaurante</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -44,6 +44,7 @@
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

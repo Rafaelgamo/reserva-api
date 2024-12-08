@@ -1,7 +1,5 @@
 package api.reservas.api.entitys;
 
-
-import api.reservas.api.Enum.DiasDaSemana;
 import api.reservas.api.dto.RestauranteDTO;
 import jakarta.persistence.*;
 
