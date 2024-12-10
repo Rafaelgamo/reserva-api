@@ -1,36 +1,52 @@
 package api.reservas.api.entitys;
 
 import api.reservas.api.Enum.NotaAvaliacao;
-import api.reservas.api.dto.AvaliacaoDTO;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "avaliacao")
 public class Avaliacao {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private Restaurante restaurante;
-    private Usuario usuario;
-    private String comentario;
+    @Enumerated(EnumType.STRING)
     private NotaAvaliacao notaAvaliacao;
 
+    @ManyToOne(targetEntity = Restaurante.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_restaurante", referencedColumnName = "id")
+    private Restaurante restaurante;
+
+    @ManyToOne(targetEntity = Reserva.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_reserva", referencedColumnName = "id")
+    private Reserva reserva;
+
+    private String comentario;
+
+    //Contructors
     public Avaliacao(){}
 
-    public Avaliacao(AvaliacaoDTO dados){
+    public  Avaliacao(Long id, NotaAvaliacao notaAvaliacao, Restaurante restaurante, Reserva reserva ,String comentario ){
+       this.id = id;
+        this.notaAvaliacao = notaAvaliacao;
         this.restaurante = new Restaurante();
-        this.usuario = new Usuario();
-        this.comentario = dados.comentario();
-        this.notaAvaliacao = dados.notaAvaliacao();
+        this.reserva = new Reserva();
+        this.comentario = comentario;
     }
 
-    public Restaurante getRestaurante(){ return restaurante;}
-    public void setRestaurante(Restaurante restaurante){ this.restaurante = restaurante;}
+    //Getters and Setters
+    public void setId(Long id){ this.id = id; }
+    public Long getId(){ return this.id; }
 
-    public void setUsuario(Usuario usuario){ this.usuario = usuario;}
-    public Usuario getUsuario(){return this.usuario;}
+    public void setNotaAvaliacao(NotaAvaliacao notaAvaliacao) {this.notaAvaliacao = notaAvaliacao;}
+    public NotaAvaliacao getNotaAvaliacao() {return notaAvaliacao;}
 
-    public void setComentario(String comentario){this.comentario = comentario;}
-    public String getComentario(){return this.comentario;}
+    public void setRestaurante(Restaurante restaurante) {this.restaurante = restaurante;}
+    public Restaurante getRestaurante() {return restaurante;}
 
-    public void setNotaAvaliacao(NotaAvaliacao notaAvaliacao){ this.notaAvaliacao = notaAvaliacao;}
-    public NotaAvaliacao getNotaAvaliacao(){return this.notaAvaliacao;}
+    public void setReserva(Reserva reserva){this.reserva = reserva;}
+    public Reserva getReserva(){return reserva;}
 
-    }
-
-
+    public void setComentario(String comentario) {this.comentario = comentario;}
+    public String getComentario() {return comentario;}
+}

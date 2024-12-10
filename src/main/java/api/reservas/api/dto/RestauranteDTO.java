@@ -1,18 +1,24 @@
 package api.reservas.api.dto;
 
 
-import api.reservas.api.Enum.DiasDaSemana;
 import api.reservas.api.entitys.Restaurante;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
 @EnableSpringDataWebSupport
 public record RestauranteDTO(
+
         Long id,
+        @NotBlank
         String nome,
+        @NotBlank
         String endereco,
+        @NotBlank
         String tipodecozinha,
+        @NotNull
         String funcionamento,
-        Integer capacidade,
+        int capacidade,
         Boolean ativo
 ){
         public RestauranteDTO(Restaurante restaurante) {
@@ -26,5 +32,6 @@ public record RestauranteDTO(
                         restaurante.getAtivo()
                 );
         }
+
 
 }

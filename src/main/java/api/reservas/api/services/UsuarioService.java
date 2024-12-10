@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,9 +21,7 @@ public class UsuarioService {
     }
 
     @Transactional
-    public long cadastroUsuario(UsuarioDTO dados) {
-        var nome = dados.nome();
-        var telefone = dados.telefone();
+    public Long cadastroUsuario(UsuarioDTO dados) {
         var usuario = new Usuario();
 
         usuario.setNome(dados.nome());
@@ -32,22 +29,19 @@ public class UsuarioService {
         usuario.setAtivo(true);
 
         var usuarioSalvo = usuarioRepository.save(usuario);
-
         return usuarioSalvo.getId();
     }
 
         @Transactional
-        public Page<UsuarioDTO> listarTodos(Pageable paginacao) {
-            return usuarioRepository.findAll(paginacao).map(UsuarioDTO::new);
+        public Page<UsuarioDTO> listarAtivos(Pageable paginacao) {
+            return usuarioRepository.findAllByAtivoTrue(paginacao).map(UsuarioDTO::new);
         }
 
-
-    @Transactional
-    public void removerUsuario(Long id) {
-        Optional<Usuario> usuario = usuarioRepository.findById(id);
-        usuario.ifPresent(value -> value.setAtivo(false));
-    }
-
+        @Transactional
+        public void removerUsuario(Long id) {
+            Optional<Usuario> usuario = usuarioRepository.findById(id);
+            usuario.ifPresent(value -> value.setAtivo(false));
+        }
 
 }
 

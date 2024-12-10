@@ -1,34 +1,34 @@
 package api.reservas.api.entitys;
 
-import api.reservas.api.dto.AlterarUsuarioDTO;
-import api.reservas.api.dto.UsuarioDTO;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
+
+import java.io.Serializable;
 
 
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
     private String telefone;
     private Boolean ativo;
 
-    //construtors
-
+    //Contructors
     public Usuario(){}
 
-    public Usuario(UsuarioDTO dados){
+    public Usuario(Long id, String nome, String telefone, Boolean ativo){
         this.ativo = true;
-        this.id = dados.id();
-        this.nome = dados.nome();
-        this.telefone = dados.telefone();
+        this.id = id;
+        this.nome =nome;
+        this.telefone = telefone;
 
     }
 
+    //Getters and Setters
     public void setId(Long id){ this.id = id; }
     public Long getId(){ return this.id; }
 
