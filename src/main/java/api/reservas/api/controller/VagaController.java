@@ -1,6 +1,5 @@
 package api.reservas.api.controller;
 
-
 import api.reservas.api.dto.VagaDTO;
 import api.reservas.api.entitys.Vaga;
 import api.reservas.api.repository.VagaRepository;

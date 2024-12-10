@@ -1,6 +1,5 @@
 package api.reservas.api.dto;
 
-
 import api.reservas.api.entitys.Vaga;
 
 public record VagaDTO(

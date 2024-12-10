@@ -1,12 +1,9 @@
 package api.reservas.api.dto;
 
-
 import api.reservas.api.entitys.Restaurante;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
-@EnableSpringDataWebSupport
 public record RestauranteDTO(
 
         Long id,

@@ -1,16 +1,9 @@
 package api.reservas.api.controller;
 
-
-import api.reservas.api.dto.AvaliacaoDTO;
 import api.reservas.api.dto.ReservaDTO;
-import api.reservas.api.dto.RestauranteDTO;
-import api.reservas.api.dto.VagaDTO;
 import api.reservas.api.entitys.Vaga;
 import api.reservas.api.repository.ReservaRepository;
-import api.reservas.api.repository.VagaRepository;
-import api.reservas.api.services.AvaliacaoService;
 import api.reservas.api.services.ReservaService;
-import api.reservas.api.services.VagaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

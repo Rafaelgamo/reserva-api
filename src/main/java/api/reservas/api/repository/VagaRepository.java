@@ -1,6 +1,5 @@
 package api.reservas.api.repository;
 
-import api.reservas.api.entitys.Usuario;
 import api.reservas.api.entitys.Vaga;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.JpaRepository;

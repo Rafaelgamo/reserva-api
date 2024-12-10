@@ -2,9 +2,6 @@ package api.reservas.api.entitys;
 
 import jakarta.persistence.*;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "vaga")
 public class Vaga  {

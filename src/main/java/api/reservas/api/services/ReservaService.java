@@ -2,7 +2,6 @@ package api.reservas.api.services;
 
 import api.reservas.api.dto.ReservaDTO;
 import api.reservas.api.entitys.*;
-import api.reservas.api.repository.AvaliacaoRepository;
 import api.reservas.api.repository.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,11 +13,10 @@ import java.util.Optional;
 @Service
 public class ReservaService {
 
-
     @Autowired
     private ReservaRepository reservaRepository;
 
-    public ReservaService(ReservaRepository reservaRepository, AvaliacaoRepository avaliacaoRepository) {
+    public ReservaService(ReservaRepository reservaRepository) {
         this.reservaRepository = reservaRepository;
     }
 
@@ -56,9 +54,5 @@ public class ReservaService {
         cancelarReserva.ifPresent(value -> value.setMesaOcupada(false));
     }
 
-    // registrar liberação de mesa
-
-    //avaliacao
-
-    }
+}
 

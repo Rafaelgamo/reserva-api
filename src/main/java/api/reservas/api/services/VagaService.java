@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-
 @Service
 public class VagaService {
 
@@ -49,7 +48,6 @@ public class VagaService {
         Optional<Vaga> vaga = vagaRepository.findById(id);
         vaga.ifPresent(value -> value.setVagaLivre(false));
     }
-
 
 }
 

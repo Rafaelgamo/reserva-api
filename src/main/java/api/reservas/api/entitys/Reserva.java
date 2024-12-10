@@ -1,9 +1,6 @@
 package api.reservas.api.entitys;
 
-
-import api.reservas.api.Enum.NotaAvaliacao;
 import jakarta.persistence.*;
-
 import java.io.Serializable;
 
 @Entity
@@ -22,9 +19,6 @@ public class Reserva  implements Serializable {
     private Vaga vaga;
 
     private Boolean mesaOcupada;
-
-    @Enumerated
-    private NotaAvaliacao notaAvaliacao;
 
     public Reserva(){}
 
