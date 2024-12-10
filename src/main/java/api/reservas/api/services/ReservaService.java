@@ -1,13 +1,11 @@
 package api.reservas.api.services;
 
-import api.reservas.api.dto.*;
-
+import api.reservas.api.dto.ReservaDTO;
 import api.reservas.api.entitys.Reserva;
-import api.reservas.api.entitys.Restaurante;
 import api.reservas.api.entitys.Usuario;
+import api.reservas.api.gateway.database.jpa.entity.RestauranteEntity;
+import api.reservas.api.gateway.database.jpa.repository.RestauranteRepository;
 import api.reservas.api.repository.ReservaRepository;
-
-import api.reservas.api.repository.RestauranteRepository;
 import api.reservas.api.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,7 +33,7 @@ public class ReservaService {
         var idRestaurante = reservaDTO.idRestaurante();
         var idUsuario = reservaDTO.idUsuario();
 
-        var restaurante = new Restaurante();
+        var restaurante = new RestauranteEntity();
         restaurante.setId(idRestaurante);
 
         var usuario = new Usuario();

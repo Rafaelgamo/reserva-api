@@ -2,9 +2,16 @@ package api.reservas.api.entitys;
 
 
 import api.reservas.api.dto.ReservaDTO;
-import jakarta.persistence.*;
-
-import java.io.Serializable;
+import api.reservas.api.gateway.database.jpa.entity.RestauranteEntity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "reserva")
@@ -14,9 +21,9 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(targetEntity = Restaurante.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = RestauranteEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_restaurante", referencedColumnName = "id")
-    private Restaurante restaurante;
+    private RestauranteEntity restauranteEntity;
 
     @OneToOne
     @JoinColumn(name = "id_Usuario", referencedColumnName = "id")
@@ -31,7 +38,7 @@ public class Reserva {
 
     public Reserva(ReservaDTO dados) {
         this.id = dados.id();
-        this.restaurante = new Restaurante();
+        this.restauranteEntity = new RestauranteEntity();
         this.usuario = new Usuario();
         this.quantidade = dados.quantidade();
         this.horario = dados.horario();
@@ -42,8 +49,8 @@ public class Reserva {
     public void setId(Long id){ this.id = id;}
     public Long getId(){ return id;}
 
-    public Restaurante getRestaurante(){ return restaurante;}
-    public void setRestaurante(Restaurante restaurante){ this.restaurante = restaurante;}
+    public RestauranteEntity getRestaurante(){ return restauranteEntity;}
+    public void setRestaurante(RestauranteEntity restauranteEntity){ this.restauranteEntity = restauranteEntity;}
 
     public void setUsuario(Usuario usuario){ this.usuario = usuario;}
     public Usuario getUsuario(){return this.usuario;}
