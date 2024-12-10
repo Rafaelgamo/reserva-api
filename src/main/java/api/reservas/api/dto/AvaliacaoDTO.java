@@ -1,6 +1,6 @@
 package api.reservas.api.dto;
 
-import api.reservas.api.enums.NotaAvaliacao;
+import api.reservas.api.domain.enums.NotaAvaliacao;
 
 public record AvaliacaoDTO(
 

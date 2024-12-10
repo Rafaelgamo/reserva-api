@@ -1,27 +1,22 @@
-package api.reservas.api.domain;
+package api.reservas.api.usecase.dto;
 
-public record Restaurante (
+public record RestauranteDTO(
         String nome,
         String cnpj,
-        Endereco endereco,
+        String cep,
+        String numeroEndereco,
         String tipoCozinha,
         int horaAbertura,
         int horaFechamento,
         int capacidade
 ) {
 
-    public Restaurante {
+    public RestauranteDTO(String nome, String cnpj, String cep, String numeroEndereco, String tipoCozinha, int horaAbertura, int horaFechamento, int capacidade) {
         if (nome == null || nome.trim().isEmpty()) {
             throw new IllegalArgumentException("Nome do restaurante necessário.");
         }
 
-        var trimmedCnpj = cnpj.trim();
-        var cnpjDigits = trimmedCnpj.replaceAll("\\D", "");
-        if (trimmedCnpj.isEmpty() || cnpjDigits.length() != 14) {
-            throw new IllegalArgumentException("CNPJ é necessário.");
-        }
-
-        if (endereco == null) {
+        if (cep == null) {
             throw new IllegalArgumentException("Endereço do restaurante necessário.");
         }
 
@@ -40,11 +35,15 @@ public record Restaurante (
         if (horaFechamento < 0 || horaFechamento > 24) {
             throw new IllegalArgumentException("Hora de fechamento não pode ser negativa ou exceder 24");
         }
+
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.cep = cep;
+        this.numeroEndereco = numeroEndereco;
+        this.tipoCozinha = tipoCozinha;
+        this.horaAbertura = horaAbertura;
+        this.horaFechamento = horaFechamento;
+        this.capacidade = capacidade;
     }
 
-    public boolean horaReservaValida(int horaParaReserva) {
-        var horaReservaValida = horaParaReserva >= horaAbertura
-                                    && horaParaReserva < horaFechamento;
-        return horaReservaValida;
-    }
 }

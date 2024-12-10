@@ -1,4 +1,4 @@
-package api.reservas.api.enums;
+package api.reservas.api.domain.enums;
 
 public enum DiasDaSemana {
     DOMINGO,

@@ -1,10 +1,8 @@
 package api.reservas.api.dto;
 
 
-import api.reservas.api.entitys.Restaurante;
-import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import api.reservas.api.gateway.database.jpa.entity.RestauranteEntity;
 
-@EnableSpringDataWebSupport
 public record RestauranteDTO(
         Long id,
         String nome,
@@ -14,15 +12,15 @@ public record RestauranteDTO(
         Integer capacidade,
         Boolean ativo
 ){
-        public RestauranteDTO(Restaurante restaurante) {
+        public RestauranteDTO(RestauranteEntity restauranteEntity) {
                 this(
-                        restaurante.getId(),
-                        restaurante.getNome(),
-                        restaurante.getEndereco(),
-                        restaurante.getTipodecozinha(),
-                        restaurante.getFuncionamento(),
-                        restaurante.getCapacidade(),
-                        restaurante.getAtivo()
+                        restauranteEntity.getId(),
+                        restauranteEntity.getNome(),
+                        null, //restauranteEntity.getEndereco(),
+                        null, //restauranteEntity.getTipoCozinha(),
+                        null, //restauranteEntity.getHorarioFuncionamento(),
+                        restauranteEntity.getCapacidade(),
+                        restauranteEntity.getAtivo()
                 );
         }
 

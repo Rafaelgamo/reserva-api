@@ -1,11 +1,12 @@
 package api.reservas.api.entitys;
 
+import api.reservas.api.domain.enums.NotaAvaliacao;
 import api.reservas.api.dto.AvaliacaoDTO;
-import api.reservas.api.enums.NotaAvaliacao;
+import api.reservas.api.gateway.database.jpa.entity.RestauranteEntity;
 
 public class Avaliacao {
 
-    private Restaurante restaurante;
+    private RestauranteEntity restauranteEntity;
     private Usuario usuario;
     private String comentario;
     private NotaAvaliacao notaAvaliacao;
@@ -13,14 +14,14 @@ public class Avaliacao {
     public Avaliacao(){}
 
     public Avaliacao(AvaliacaoDTO dados){
-        this.restaurante = new Restaurante();
+        this.restauranteEntity = new RestauranteEntity();
         this.usuario = new Usuario();
         this.comentario = dados.comentario();
         this.notaAvaliacao = dados.notaAvaliacao();
     }
 
-    public Restaurante getRestaurante(){ return restaurante;}
-    public void setRestaurante(Restaurante restaurante){ this.restaurante = restaurante;}
+    public RestauranteEntity getRestaurante(){ return restauranteEntity;}
+    public void setRestaurante(RestauranteEntity restauranteEntity){ this.restauranteEntity = restauranteEntity;}
 
     public void setUsuario(Usuario usuario){ this.usuario = usuario;}
     public Usuario getUsuario(){return this.usuario;}
