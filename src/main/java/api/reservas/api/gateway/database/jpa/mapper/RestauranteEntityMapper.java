@@ -5,12 +5,14 @@ import api.reservas.api.gateway.database.jpa.entity.EnderecoEntity;
 import api.reservas.api.gateway.database.jpa.entity.RestauranteEntity;
 import api.reservas.api.gateway.database.jpa.entity.TipoCozinhaEntity;
 
-public class RestauranteMapper {
+public class RestauranteEntityMapper {
 
+    // remove?
     public RestauranteEntity mapToEntity(Long id, Restaurante restaurante) {
         return mapToEntity(id, restaurante, true);
     }
 
+    // remove?
     public RestauranteEntity mapToEntity(Long idRestaurante, Restaurante restaurante, boolean ativo, EnderecoEntity enderecoEntity, TipoCozinhaEntity tipoCozinhaEntity) {
         return new RestauranteEntity(
                 idRestaurante,

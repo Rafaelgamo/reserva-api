@@ -2,7 +2,9 @@ package api.reservas.api.usecase.restaurantes;
 
 import api.reservas.api.domain.Endereco;
 import api.reservas.api.domain.Restaurante;
+import api.reservas.api.exception.RecursoJaCadastradoException;
 import api.reservas.api.gateway.RestauranteGateway;
+import api.reservas.api.gateway.database.jpa.entity.RestauranteEntity;
 import api.reservas.api.usecase.dto.RestauranteDTO;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,9 @@ public class CadastrarRestauranteUseCase {
     public Long cadastrarRestaurante(RestauranteDTO restauranteDTO) {
         var cnpj = restauranteDTO.cnpj();
         var cnpjCadastrado = restauranteGateway.existePorCnpj(cnpj);
+        if (cnpjCadastrado) {
+            throw new RecursoJaCadastradoException(RestauranteEntity.class, "cnpj", cnpj);
+        }
 
         Endereco endereco = new Endereco(restauranteDTO.cep(), restauranteDTO.numeroEndereco());
 
