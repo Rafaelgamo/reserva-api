@@ -1,6 +1,6 @@
-package api.reservas.api.repository;
+package api.reservas.api.repository_remove;
 
-import api.reservas.api.entitys.Avaliacao;
+import api.reservas.api.entitys_remove.Avaliacao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

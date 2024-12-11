@@ -1,8 +1,8 @@
-package api.reservas.api.services;
+package api.reservas.api.services_remove;
 
-import api.reservas.api.dto.UsuarioDTO;
-import api.reservas.api.entitys.Usuario;
-import api.reservas.api.repository.UsuarioRepository;
+import api.reservas.api.dto_remove.UsuarioDTO;
+import api.reservas.api.entitys_remove.Usuario;
+import api.reservas.api.repository_remove.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

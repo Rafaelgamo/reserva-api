@@ -1,6 +1,6 @@
-package api.reservas.api.repository;
+package api.reservas.api.repository_remove;
 
-import api.reservas.api.entitys.Usuario;
+import api.reservas.api.entitys_remove.Usuario;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

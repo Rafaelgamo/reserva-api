@@ -1,7 +1,7 @@
-package api.reservas.api.dto;
+package api.reservas.api.dto_remove;
 
 import api.reservas.api.domain.enums.NotaAvaliacao;
-import api.reservas.api.entitys.Avaliacao;
+import api.reservas.api.entitys_remove.Avaliacao;
 
 public record AvaliacaoDTO(
 

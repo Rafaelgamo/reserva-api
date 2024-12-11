@@ -1,4 +1,4 @@
-package api.reservas.api.entitys;
+package api.reservas.api.entitys_remove;
 
 
 import jakarta.persistence.Entity;

@@ -1,6 +1,6 @@
-package api.reservas.api.dto;
+package api.reservas.api.dto_remove;
 
-import api.reservas.api.entitys.Reserva;
+import api.reservas.api.entitys_remove.Reserva;
 
 public record ReservaDTO(
 

@@ -1,6 +1,6 @@
-package api.reservas.api.services;
+package api.reservas.api.services_remove;
 
-import api.reservas.api.dto.RestauranteDTO;
+import api.reservas.api.dto_remove.RestauranteDTO;
 import api.reservas.api.gateway.database.jpa.entity.RestauranteEntity;
 import api.reservas.api.gateway.database.jpa.repository.RestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;

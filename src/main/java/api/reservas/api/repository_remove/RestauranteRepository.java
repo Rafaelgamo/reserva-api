@@ -1,11 +1,12 @@
-package api.reservas.api.repository;
+package api.reservas.api.repository_remove;
 
-import api.reservas.api.entitys.Restaurante;
+import api.reservas.api.entitys_remove.Restaurante;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Optional;
 

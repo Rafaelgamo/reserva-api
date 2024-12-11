@@ -1,5 +1,11 @@
-package api.reservas.api.entitys;
-import jakarta.persistence.*;
+package api.reservas.api.entitys_remove;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import java.io.Serializable;
 
 @Entity

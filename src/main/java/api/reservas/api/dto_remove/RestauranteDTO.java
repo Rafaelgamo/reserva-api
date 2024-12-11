@@ -1,4 +1,4 @@
-package api.reservas.api.dto;
+package api.reservas.api.dto_remove;
 
 
 import api.reservas.api.gateway.database.jpa.entity.RestauranteEntity;

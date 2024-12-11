@@ -1,6 +1,6 @@
-package api.reservas.api.dto;
+package api.reservas.api.dto_remove;
 
-import api.reservas.api.entitys.Usuario;
+import api.reservas.api.entitys_remove.Usuario;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
