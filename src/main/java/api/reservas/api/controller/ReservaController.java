@@ -1,11 +1,10 @@
 package api.reservas.api.controller;
 
-
-import api.reservas.api.dto.*;
-import api.reservas.api.entitys.Reserva;
+import api.reservas.api.dto.ReservaDTO;
+import api.reservas.api.entitys.Vaga;
 import api.reservas.api.repository.ReservaRepository;
 import api.reservas.api.services.ReservaService;
-import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -13,47 +12,35 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.List;
-
 @RestController
-@RequestMapping("/reservas")
+@RequestMapping("/reserva")
 public class ReservaController {
 
-    public  ReservaRepository reservaRepository;
+    @Autowired
+    private ReservaService reservaService;
 
-    public final ReservaService reservaService;
+    @Autowired
+    private ReservaRepository reservaRepository;
 
-
-    public ReservaController(ReservaService reservaService) {
-        this.reservaService = reservaService;
-    }
-
-    //cadastrar
-    @PostMapping
-    @Transactional
-    public ResponseEntity cadastroReserva(@RequestBody ReservaDTO reservaDTO) {
+    // craiar reserva
+    @PostMapping("/registrar")
+    public ResponseEntity criarVaga(@RequestBody ReservaDTO reservaDTO){
         var idCadastro = reservaService.criarReserva(reservaDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new Reserva());
+        return ResponseEntity.status(HttpStatus.CREATED).body(new Vaga());
     }
 
-    //listarTodas
+    //listar todas as reserva ativas
     @GetMapping
-    public ResponseEntity<Page<ReservaDTO>> listarTodos(@PageableDefault(size =10) Pageable paginacao){
-        var page = reservaService.listarTodos(paginacao);
+    public ResponseEntity<Page<ReservaDTO>> listarAtivos(@PageableDefault(size =10) Pageable paginacao){
+        var page = reservaService.listar(paginacao);
         return ResponseEntity.ok(page);
-    }
-
-    //cancelar
+        }
+    //cancelar reserva
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> cacelarReserva(@PathVariable(name = "id") Long id) {
-        reservaService.cancelarReserva(id);
+    public ResponseEntity<Void> removerReserva(@PathVariable(name = "id") Long id) {
+        reservaService.removerReserva(id);
         return ResponseEntity.noContent().build();
+        }
+
+
     }
-
-    //Registrar Por horário
-
-    //listar por id
-
-    //resgistra liberação de mesa apos saida docliente
-}

@@ -1,37 +1,38 @@
 package api.reservas.api.entitys;
 
-import api.reservas.api.domain.enums.NotaAvaliacao;
-import api.reservas.api.dto.AvaliacaoDTO;
-import api.reservas.api.gateway.database.jpa.entity.RestauranteEntity;
+import api.reservas.api.Enum.NotaAvaliacao;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "avaliar")
 public class Avaliacao {
 
-    private RestauranteEntity restauranteEntity;
-    private Usuario usuario;
-    private String comentario;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Enumerated
     private NotaAvaliacao notaAvaliacao;
+
+    private String comentario;
 
     public Avaliacao(){}
 
-    public Avaliacao(AvaliacaoDTO dados){
-        this.restauranteEntity = new RestauranteEntity();
-        this.usuario = new Usuario();
-        this.comentario = dados.comentario();
-        this.notaAvaliacao = dados.notaAvaliacao();
+    public Avaliacao(Long id, NotaAvaliacao notaAvaliacao, String comentario){
+        this.id = id;
+        this.notaAvaliacao = notaAvaliacao;
+        this.comentario = comentario;
     }
 
-    public RestauranteEntity getRestaurante(){ return restauranteEntity;}
-    public void setRestaurante(RestauranteEntity restauranteEntity){ this.restauranteEntity = restauranteEntity;}
+    public void setId(Long id) {this.id = id;}
+    public Long getId(){return id;}
 
-    public void setUsuario(Usuario usuario){ this.usuario = usuario;}
-    public Usuario getUsuario(){return this.usuario;}
+    public void setNotaAvaliacao(NotaAvaliacao notaAvaliacao) {this.notaAvaliacao = notaAvaliacao;}
+    public NotaAvaliacao getNotaAvaliacao(){return notaAvaliacao;}
 
-    public void setComentario(String comentario){this.comentario = comentario;}
-    public String getComentario(){return this.comentario;}
+    public void setComentario(String comentario) {this.comentario = comentario;}
+    public String getComentario(){return comentario;}
 
-    public void setNotaAvaliacao(NotaAvaliacao notaAvaliacao){ this.notaAvaliacao = notaAvaliacao;}
-    public NotaAvaliacao getNotaAvaliacao(){return this.notaAvaliacao;}
-
-    }
+}
 
 

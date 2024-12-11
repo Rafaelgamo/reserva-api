@@ -4,6 +4,7 @@ import api.reservas.api.dto.RestauranteDTO;
 import api.reservas.api.gateway.database.jpa.entity.RestauranteEntity;
 import api.reservas.api.services.RestauranteService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -25,11 +26,10 @@ public class RestauranteController {
 
         public RestauranteController(RestauranteService restauranteService){this.restauranteService = restauranteService;}
 
-
-        // novo cadastro
+        //novo cadastro
         @PostMapping
         @Transactional
-        public ResponseEntity cadastro(@RequestBody RestauranteDTO restauranteDTO) {
+        public ResponseEntity cadastro(@RequestBody @Valid RestauranteDTO restauranteDTO) {
                 var idCadastro = restauranteService.cadastroRestaurante(restauranteDTO);
                 return ResponseEntity.status(HttpStatus.CREATED).body(new RestauranteEntity());
         }
@@ -37,8 +37,8 @@ public class RestauranteController {
 
         //listar todos restaurantes
         @GetMapping
-        public ResponseEntity<Page<RestauranteDTO>> listarTodos(@PageableDefault(size =10) Pageable paginacao){
-                var page = restauranteService.listarTodos(paginacao);
+        public ResponseEntity<Page<RestauranteDTO>> listarAtivos(@PageableDefault(size =10) Pageable paginacao){
+                var page = restauranteService.listarAtivos(paginacao);
                 return ResponseEntity.ok(page);
         }
 
@@ -49,8 +49,26 @@ public class RestauranteController {
                 return ResponseEntity.noContent().build();
         }
 
-
         //criar indice para os campos nome, localização e tipo de cozinha
+
+        @GetMapping("/nome/{nome}")
+        public ResponseEntity<List<Restaurante>> buscarPorNome(@PathVariable (name = "nome") String nomeRestaurante){
+                var page = restauranteService.buscarPorNome(nomeRestaurante);
+                return ResponseEntity.ok(page);
+        }
+        @GetMapping("/endereco/{endereco}")
+        public ResponseEntity<Optional<Restaurante>> buscarPorEndereco(@PathVariable (name = "endereco") String enderecoRestaurante){
+                var page = restauranteService.buscarPorEndereco(enderecoRestaurante);
+                return ResponseEntity.ok(page);
+        }
+
+        @GetMapping("/cozinha/{cozinha}")
+        public ResponseEntity<List<Restaurante>> buscarPorCozinha(@PathVariable (name = "tipodecozinha") String tipodecozinha){
+                var page = restauranteService.buscarPorCozinha(tipodecozinha);
+                return ResponseEntity.ok(page);
+        }
+
+
 }
 
 

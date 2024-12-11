@@ -21,46 +21,43 @@ public class ReservaService {
     @Autowired
     private ReservaRepository reservaRepository;
 
-    @Autowired
-    private RestauranteRepository resturanteRepository;
+    public ReservaService(ReservaRepository reservaRepository) {
+        this.reservaRepository = reservaRepository;
+    }
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
+    //criar reserva
     @Transactional
-    public Long criarReserva(ReservaDTO reservaDTO) {
+    public Long criarReserva(ReservaDTO reservaDTO){
 
-        var idRestaurante = reservaDTO.idRestaurante();
-        var idUsuario = reservaDTO.idUsuario();
-
-        var restaurante = new RestauranteEntity();
-        restaurante.setId(idRestaurante);
-
+        var idUsuario = reservaDTO.usuario();
         var usuario = new Usuario();
         usuario.setId(idUsuario);
 
+        var idVaga = reservaDTO.vaga();
+        var vaga = new Vaga();
+        vaga.setId(idVaga);
+
         var reserva = new Reserva();
-
-        reserva.setRestaurante(restaurante);
         reserva.setUsuario(usuario);
-        reserva.setQuantidade(reservaDTO.quantidade());
-        reserva.setHorario(reservaDTO.horario());
-        reserva.setAtivo(true);
+        reserva.setVaga(vaga);
+        reserva.setMesaOcupada(true);
 
-        var reservaSalva = reservaRepository.save(reserva);
-        return reservaSalva.getId();
+        var salvarReserva = reservaRepository.save(reserva);
+        return salvarReserva.getId();
 
     }
 
     @Transactional
-    public Page<ReservaDTO> listarTodos(Pageable paginacao) {
-        return reservaRepository.findAll(paginacao).map(ReservaDTO::new);
+    public Page<ReservaDTO> listar(Pageable paginacao) {
+        return reservaRepository.findAllByMesaOcupadaTrue(paginacao).map(ReservaDTO::new);
     }
 
+    //cancelar reserva
     @Transactional
-    public void cancelarReserva(Long id) {
-        Optional<Reserva> reserva = reservaRepository.findById(id);
-        reserva.ifPresent(value -> value.setAtivo(false));
+    public void removerReserva(Long id) {
+        Optional<Reserva> cancelarReserva = reservaRepository.findById(id);
+        cancelarReserva.ifPresent(value -> value.setMesaOcupada(false));
     }
 
 }
+

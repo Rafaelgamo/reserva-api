@@ -1,14 +1,19 @@
 package api.reservas.api.dto;
 
 import api.reservas.api.entitys.Usuario;
-import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-
-@EnableSpringDataWebSupport
 public record UsuarioDTO(
+
         Long id,
+        @NotBlank
         String nome,
+
+        @NotNull
+
         String telefone,
+
         Boolean ativo
 ) {
 

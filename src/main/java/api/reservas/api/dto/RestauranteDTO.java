@@ -2,14 +2,21 @@ package api.reservas.api.dto;
 
 
 import api.reservas.api.gateway.database.jpa.entity.RestauranteEntity;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record RestauranteDTO(
+
         Long id,
+        @NotBlank
         String nome,
+        @NotBlank
         String endereco,
+        @NotBlank
         String tipodecozinha,
+        @NotNull
         String funcionamento,
-        Integer capacidade,
+        int capacidade,
         Boolean ativo
 ){
         public RestauranteDTO(RestauranteEntity restauranteEntity) {
@@ -23,5 +30,6 @@ public record RestauranteDTO(
                         restauranteEntity.getAtivo()
                 );
         }
+
 
 }
