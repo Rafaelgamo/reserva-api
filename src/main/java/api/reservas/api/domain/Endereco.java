@@ -1,5 +1,7 @@
 package api.reservas.api.domain;
 
+import api.reservas.api.exception.ValidacaoException;
+
 public record Endereco(
         String cep,
         String numero
@@ -8,11 +10,11 @@ public record Endereco(
         var formatoCepValido = formatoCepValido(cep);
 
         if (cep.trim().isEmpty() || !formatoCepValido) {
-            throw new IllegalArgumentException("CEP é necessário e precisa ter 8 dígitos");
+            throw new ValidacaoException("CEP é necessário e precisa ter 8 dígitos");
         }
 
         if (numero.trim().isEmpty()) {
-            throw new IllegalArgumentException("Número do endereço é necessário");
+            throw new ValidacaoException("Número do endereço é necessário");
         }
 
         this.cep = cep;
