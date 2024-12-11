@@ -1,6 +1,5 @@
 package api.reservas.api.gateway.database.jpa.entity;
 
-import api.reservas.api.dto.RestauranteDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -48,17 +47,6 @@ public class RestauranteEntity {
         this.ativo = ativo;
         this.endereco = endereco;
         this.tipoCozinha = tipoCozinha;
-    }
-
-    public RestauranteEntity(RestauranteDTO dados) {
-        throw new IllegalArgumentException();
-        /*this.id = dados.id();
-        this.nome = dados.nome();
-        this.endereco = null;
-        this.tipoCozinha = dados.tipodecozinha();
-        this.horarioFuncionamento = dados.funcionamento();
-        this.capacidade = dados.capacidade();
-        this.ativo = true;*/
     }
 
     public RestauranteEntity() {}

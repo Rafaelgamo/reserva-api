@@ -8,7 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
+
 import java.util.Optional;
 
 @Service
@@ -20,14 +20,18 @@ public class RestauranteService {
     public RestauranteService(RestauranteRepository restauranteRepository){ this.restauranteRepository = restauranteRepository;}
 
     @Transactional
-    public Long cadastroRestaurante(RestauranteDTO dados){
-
-        var restaurante = new Restaurante();
+    public long cadastroRestaurante(RestauranteDTO dados){
+        var nome = dados.nome();
+        var endereco = dados.endereco();
+        var tipodecomida = dados.tipodecozinha();
+        var funcionamento = dados.funcionamento();
+        var capacidade = dados.capacidade();
+        var restaurante = new RestauranteEntity();
 
         restaurante.setNome(dados.nome());
-        restaurante.setEndereco(null/*dados.endereco()*/);
-        restaurante.setTipoCozinha(null/*dados.tipodecozinha()*/);
-        //restaurante.setHorarioFuncionamento(dados.funcionamento());
+        //restaurante.setEndereco(dados.endereco());
+        //restaurante.setTipodecozinha(dados.tipodecozinha());
+        //restaurante.setFuncionamento(dados.funcionamento());
         restaurante.setCapacidade(dados.capacidade());
         restaurante.setAtivo(true);
 
@@ -40,7 +44,7 @@ public class RestauranteService {
 
     @Transactional
     public Page<RestauranteDTO> listarAtivos(Pageable paginacao) {
-        return restauranteRepository.findAllByAtivoTrue(paginacao).map(RestauranteDTO::new);
+        return restauranteRepository.findAll(paginacao).map(RestauranteDTO::new);
     }
 
     @Transactional
@@ -49,21 +53,5 @@ public class RestauranteService {
         restaurante.ifPresent(value -> value.setAtivo(false));
     }
 
-    @Transactional
-    public List<Restaurante> buscarPorNome(String nome){
-        var restaurante = restauranteRepository.findByNome(nome);
-        return restaurante;
-    }
 
-    @Transactional
-    public Optional<Restaurante> buscarPorEndereco(String endereco){
-        var restaurante = restauranteRepository.findByEndereco(endereco);
-        return restaurante;
-    }
-    @Transactional
-    public List<Restaurante> buscarPorCozinha(String tipodecozinha){
-        var restaurante = restauranteRepository.findByTipodecozinha(tipodecozinha);
-        return restaurante;
-
-    }
 }

@@ -1,7 +1,12 @@
 package api.reservas.api.entitys;
 
-import api.reservas.api.Enum.NotaAvaliacao;
-import jakarta.persistence.*;
+import api.reservas.api.domain.enums.NotaAvaliacao;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "avaliar")
