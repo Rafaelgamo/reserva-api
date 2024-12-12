@@ -10,5 +10,6 @@ public interface RestauranteRepository extends JpaRepository<RestauranteEntity, 
 
     boolean existsByCnpj(String cnpj);
 
+    void deleteByCnpj(String cnpj);
 }
 

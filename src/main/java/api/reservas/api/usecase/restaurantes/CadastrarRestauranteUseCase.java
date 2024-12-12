@@ -7,10 +7,14 @@ import api.reservas.api.gateway.RestauranteGateway;
 import api.reservas.api.gateway.database.jpa.entity.RestauranteEntity;
 import api.reservas.api.usecase.dto.RestauranteDTO;
 import jakarta.transaction.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CadastrarRestauranteUseCase {
+
+    private static final Logger logger = LoggerFactory.getLogger(CadastrarRestauranteUseCase.class);
 
     private final RestauranteGateway restauranteGateway;
 
@@ -23,6 +27,7 @@ public class CadastrarRestauranteUseCase {
         var cnpj = restauranteDTO.cnpj();
         var cnpjCadastrado = restauranteGateway.existePorCnpj(cnpj);
         if (cnpjCadastrado) {
+            logger.warn("CNPJ já cadastrado em restaurantes: {}", cnpj);
             throw new RecursoJaCadastradoException(RestauranteEntity.class, "cnpj", cnpj);
         }
 
@@ -38,7 +43,7 @@ public class CadastrarRestauranteUseCase {
                 restauranteDTO.capacidade()
         );
 
-        var restauranteId = restauranteGateway.cadastrarRestaurante(domainRestaurante);
+        var restauranteId = restauranteGateway.cadastrar(domainRestaurante);
         return restauranteId;
     }
 

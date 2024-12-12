@@ -31,7 +31,7 @@ public class RestauranteJpaGateway implements RestauranteGateway {
     }
 
     @Override
-    public Long cadastrarRestaurante(Restaurante domainRestaurante) {
+    public Long cadastrar(Restaurante domainRestaurante) {
         logger.info("Cadastrando restaurante: nome={}, cnpj={}", domainRestaurante.nome(), domainRestaurante.cnpj());
 
         var enderecoDomain = domainRestaurante.endereco();
@@ -56,6 +56,12 @@ public class RestauranteJpaGateway implements RestauranteGateway {
     public boolean existePorCnpj(String cnpj) {
         logger.info("Checando existencia por cnpj: cnpj={}", cnpj);
         return restauranteRepository.existsByCnpj(cnpj);
+    }
+
+    @Override
+    public void excluir(String cnpj) {
+        logger.info("Excluindo restaurante: cnpj={}", cnpj);
+        restauranteRepository.deleteByCnpj(cnpj);
     }
 
     private TipoCozinhaEntity buscarOuCriarTipoCozinha(String nomeTipoCozinha) {

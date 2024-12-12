@@ -6,7 +6,9 @@ import api.reservas.api.controller.mapper.RestauranteDTOMapper;
 import api.reservas.api.dto_remove.RestauranteDTO;
 import api.reservas.api.services_remove.RestauranteService;
 import api.reservas.api.usecase.restaurantes.CadastrarRestauranteUseCase;
+import api.reservas.api.usecase.restaurantes.ExcluirRestauranteUseCase;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -26,12 +28,14 @@ public class RestauranteController {
 
     private final RestauranteService restauranteService;
     private final CadastrarRestauranteUseCase cadastrarRestauranteUseCase;
+    private final ExcluirRestauranteUseCase excluirRestauranteUseCase;
 
     private final RestauranteDTOMapper restauranteDTOMapper = new RestauranteDTOMapper();
 
-    public RestauranteController(RestauranteService restauranteService, CadastrarRestauranteUseCase cadastrarRestauranteUseCase) {
+    public RestauranteController(RestauranteService restauranteService, CadastrarRestauranteUseCase cadastrarRestauranteUseCase, ExcluirRestauranteUseCase excluirRestauranteUseCase) {
         this.restauranteService = restauranteService;
         this.cadastrarRestauranteUseCase = cadastrarRestauranteUseCase;
+        this.excluirRestauranteUseCase = excluirRestauranteUseCase;
     }
 
     @PostMapping
@@ -53,34 +57,11 @@ public class RestauranteController {
         return ResponseEntity.ok(page);
     }
 
-    //cancelamento de cadastro
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> removerRestaurante(@PathVariable(name = "id") Long id) {
-        restauranteService.removerRestaurante(id);
+    @DeleteMapping("/{cnpj}")
+    public ResponseEntity<Void> removerRestaurante(@PathVariable(name = "cnpj")
+                                                       @Size(min = 14, max = 18) String cnpj) {
+        excluirRestauranteUseCase.excluirRestaurante(cnpj);
         return ResponseEntity.noContent().build();
     }
 
-    //criar indice para os campos nome, localização e tipo de cozinha
-
-        /*@GetMapping("/nome/{nome}")
-        public ResponseEntity<List<RestauranteEntity>> buscarPorNome(@PathVariable (name = "nome") String nomeRestaurante){
-                var page = restauranteService.buscarPorNome(nomeRestaurante);
-                return ResponseEntity.ok(page);
-        }
-        @GetMapping("/endereco/{endereco}")
-        public ResponseEntity<Optional<RestauranteEntity>> buscarPorEndereco(@PathVariable (name = "endereco") String enderecoRestaurante){
-                var page = restauranteService.buscarPorEndereco(enderecoRestaurante);
-                return ResponseEntity.ok(page);
-        }
-
-        @GetMapping("/cozinha/{cozinha}")
-        public ResponseEntity<List<RestauranteEntity>> buscarPorCozinha(@PathVariable (name = "tipodecozinha") String tipodecozinha){
-                var page = restauranteService.buscarPorCozinha(tipodecozinha);
-                return ResponseEntity.ok(page);
-        }*/
-
-
 }
-
-
-
