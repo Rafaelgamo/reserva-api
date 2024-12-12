@@ -1,0 +1,38 @@
+name: reserva-service
+
+volumes:
+  reserva_db_data: {}
+
+services:
+  api:
+    image: caio303/reserva-api:latest
+    environment:
+      RESERVA_PROFILE: dev
+      RESERVA_DB_USER: postgres
+      RESERVA_DB_PASSWORD: postgres
+      RESERVA_DB_HOST: postgresql://db
+      RESERVA_DB_PORT: 5432
+      PORT: 8080
+    networks:
+      - reserva-net
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+  db:
+    image: postgres:17
+    volumes:
+      - reserva_db_data:/var/lib/postgresql
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: reservadb_dev
+    networks:
+      - reserva-net
+    expose:
+      - 5432
+
+networks:
+  reserva-net:
+    driver: bridge

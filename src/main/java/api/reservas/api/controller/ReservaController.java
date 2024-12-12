@@ -2,7 +2,7 @@ package api.reservas.api.controller;
 
 import api.reservas.api.dto_remove.ReservaDTO;
 import api.reservas.api.entitys_remove.Vaga;
-import api.reservas.api.repository_remove.ReservaRepository;
+import api.reservas.api.repository_remove.ReservaRepository_Remove;
 import api.reservas.api.services_remove.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,7 +26,7 @@ public class ReservaController {
     private ReservaService reservaService;
 
     @Autowired
-    private ReservaRepository reservaRepository;
+    private ReservaRepository_Remove reservaRepositoryRemove;
 
     // craiar reserva
     @PostMapping("/registrar")

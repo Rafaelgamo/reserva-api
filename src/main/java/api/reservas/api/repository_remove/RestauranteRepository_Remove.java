@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface RestauranteRepository  extends JpaRepository<Restaurante, Long> {
+public interface RestauranteRepository_Remove extends JpaRepository<Restaurante, Long> {
 
     Page<Restaurante> findAllByAtivoTrue(Pageable paginacao);
 

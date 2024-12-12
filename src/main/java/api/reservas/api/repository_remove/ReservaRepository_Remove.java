@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ReservaRepository extends JpaRepository<Reserva, Long> {
+public interface ReservaRepository_Remove extends JpaRepository<Reserva, Long> {
 
     Page<Reserva> findAllByMesaOcupadaTrue(Pageable paginacao);
 

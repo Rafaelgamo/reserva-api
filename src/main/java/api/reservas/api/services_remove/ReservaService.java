@@ -4,7 +4,7 @@ import api.reservas.api.dto_remove.ReservaDTO;
 import api.reservas.api.entitys_remove.Reserva;
 import api.reservas.api.entitys_remove.Usuario;
 import api.reservas.api.entitys_remove.Vaga;
-import api.reservas.api.repository_remove.ReservaRepository;
+import api.reservas.api.repository_remove.ReservaRepository_Remove;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,10 +17,10 @@ import java.util.Optional;
 public class ReservaService {
 
     @Autowired
-    private ReservaRepository reservaRepository;
+    private ReservaRepository_Remove reservaRepositoryRemove;
 
-    public ReservaService(ReservaRepository reservaRepository) {
-        this.reservaRepository = reservaRepository;
+    public ReservaService(ReservaRepository_Remove reservaRepositoryRemove) {
+        this.reservaRepositoryRemove = reservaRepositoryRemove;
     }
 
     //criar reserva
@@ -40,20 +40,20 @@ public class ReservaService {
         reserva.setVaga(vaga);
         reserva.setMesaOcupada(true);
 
-        var salvarReserva = reservaRepository.save(reserva);
+        var salvarReserva = reservaRepositoryRemove.save(reserva);
         return salvarReserva.getId();
 
     }
 
     @Transactional
     public Page<ReservaDTO> listar(Pageable paginacao) {
-        return reservaRepository.findAllByMesaOcupadaTrue(paginacao).map(ReservaDTO::new);
+        return reservaRepositoryRemove.findAllByMesaOcupadaTrue(paginacao).map(ReservaDTO::new);
     }
 
     //cancelar reserva
     @Transactional
     public void removerReserva(Long id) {
-        Optional<Reserva> cancelarReserva = reservaRepository.findById(id);
+        Optional<Reserva> cancelarReserva = reservaRepositoryRemove.findById(id);
         cancelarReserva.ifPresent(value -> value.setMesaOcupada(false));
     }
 

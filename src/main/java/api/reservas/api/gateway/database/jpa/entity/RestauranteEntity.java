@@ -27,6 +27,8 @@ public class RestauranteEntity {
     private Integer horaAbertura;
     private Integer horaFechamento;
     private Integer capacidade;
+
+    @Column(nullable = false)
     private Boolean ativo;
 
     @JoinColumn(name = "endereco_id")

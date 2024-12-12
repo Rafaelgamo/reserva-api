@@ -13,8 +13,6 @@ public class EnderecoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Id
     private String cep;
     private String numero;
 
