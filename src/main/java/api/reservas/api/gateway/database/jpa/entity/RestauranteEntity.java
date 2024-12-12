@@ -26,7 +26,7 @@ public class RestauranteEntity {
 
     private Integer horaAbertura;
     private Integer horaFechamento;
-    private Integer capacidade;
+    private Integer capacidadeEmMesas;
 
     @Column(nullable = false)
     private Boolean ativo;
@@ -39,13 +39,13 @@ public class RestauranteEntity {
     @ManyToOne(targetEntity = TipoCozinhaEntity.class, fetch = FetchType.LAZY)
     private TipoCozinhaEntity tipoCozinha;
 
-    public RestauranteEntity(Long id, String cnpj, String nome, Integer horaAbertura, Integer horaFechamento, Integer capacidade, Boolean ativo, EnderecoEntity endereco, TipoCozinhaEntity tipoCozinha) {
+    public RestauranteEntity(Long id, String cnpj, String nome, Integer horaAbertura, Integer horaFechamento, Integer capacidadeEmMesas, Boolean ativo, EnderecoEntity endereco, TipoCozinhaEntity tipoCozinha) {
         this.id = id;
         this.cnpj = cnpj;
         this.nome = nome;
         this.horaAbertura = horaAbertura;
         this.horaFechamento = horaFechamento;
-        this.capacidade = capacidade;
+        this.capacidadeEmMesas = capacidadeEmMesas;
         this.ativo = ativo;
         this.endereco = endereco;
         this.tipoCozinha = tipoCozinha;
@@ -93,12 +93,12 @@ public class RestauranteEntity {
         this.horaFechamento = horaFechamento;
     }
 
-    public Integer getCapacidade() {
-        return capacidade;
+    public Integer getCapacidadeEmMesas() {
+        return capacidadeEmMesas;
     }
 
-    public void setCapacidade(Integer capacidade) {
-        this.capacidade = capacidade;
+    public void setCapacidadeEmMesas(Integer capacidade) {
+        this.capacidadeEmMesas = capacidade;
     }
 
     public Boolean getAtivo() {

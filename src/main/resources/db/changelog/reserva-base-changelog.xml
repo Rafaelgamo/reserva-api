@@ -62,7 +62,7 @@
             <column name="horaFechamento" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="capacidade" type="INT">
+            <column name="capacidade_em_mesas" type="INT">
                 <constraints nullable="false"/>
             </column>
             <column name="endereco_id" type="BIGINT">

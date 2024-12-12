@@ -9,7 +9,7 @@ public record Restaurante (
         String tipoCozinha,
         int horaAbertura,
         int horaFechamento,
-        int capacidade
+        int capacidadeEmMesas
 ) {
 
     public Restaurante {
@@ -31,8 +31,8 @@ public record Restaurante (
             throw new ValidacaoException("Tipo de cozinha necessário.");
         }
 
-        if (capacidade < 0) {
-            throw new ValidacaoException("A capacidade do restaurante não pode ser negativa.");
+        if (capacidadeEmMesas < 0) {
+            throw new ValidacaoException("A capacidadeEmMesas do restaurante não pode ser negativa.");
         }
 
         if (horaAbertura < 0 || horaAbertura > 24) {

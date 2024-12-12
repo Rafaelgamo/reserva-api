@@ -8,10 +8,10 @@ public record RestauranteDTO(
         String tipoCozinha,
         int horaAbertura,
         int horaFechamento,
-        int capacidade
+        int capacidadeEmMesas
 ) {
 
-    public RestauranteDTO(String nome, String cnpj, String cep, String numeroEndereco, String tipoCozinha, int horaAbertura, int horaFechamento, int capacidade) {
+    public RestauranteDTO(String nome, String cnpj, String cep, String numeroEndereco, String tipoCozinha, int horaAbertura, int horaFechamento, int capacidadeEmMesas) {
         if (nome == null || nome.trim().isEmpty()) {
             throw new IllegalArgumentException("Nome do restaurante necessário.");
         }
@@ -24,8 +24,8 @@ public record RestauranteDTO(
             throw new IllegalArgumentException("Tipo de cozinha necessário.");
         }
 
-        if (capacidade < 0) {
-            throw new IllegalArgumentException("A capacidade do restaurante não pode ser negativa.");
+        if (capacidadeEmMesas < 0) {
+            throw new IllegalArgumentException("A capacidadeEmMesas do restaurante não pode ser negativa.");
         }
 
         if (horaAbertura < 0 || horaAbertura > 24) {
@@ -43,7 +43,7 @@ public record RestauranteDTO(
         this.tipoCozinha = tipoCozinha;
         this.horaAbertura = horaAbertura;
         this.horaFechamento = horaFechamento;
-        this.capacidade = capacidade;
+        this.capacidadeEmMesas = capacidadeEmMesas;
     }
 
 }
