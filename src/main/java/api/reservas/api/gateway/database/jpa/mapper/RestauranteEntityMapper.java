@@ -7,26 +7,6 @@ import api.reservas.api.gateway.database.jpa.entity.TipoCozinhaEntity;
 
 public class RestauranteEntityMapper {
 
-    // remove?
-    public RestauranteEntity mapToEntity(Long id, Restaurante restaurante) {
-        return mapToEntity(id, restaurante, true);
-    }
-
-    // remove?
-    public RestauranteEntity mapToEntity(Long idRestaurante, Restaurante restaurante, boolean ativo, EnderecoEntity enderecoEntity, TipoCozinhaEntity tipoCozinhaEntity) {
-        return new RestauranteEntity(
-                idRestaurante,
-                restaurante.cnpj(),
-                restaurante.nome(),
-                restaurante.horaAbertura(),
-                restaurante.horaFechamento(),
-                restaurante.capacidade(),
-                ativo,
-                enderecoEntity,
-                tipoCozinhaEntity
-        );
-    }
-
     public RestauranteEntity mapToEntity(Restaurante restaurante, EnderecoEntity enderecoEntity, TipoCozinhaEntity tipoCozinhaEntity) {
         var restauranteEntity = mapToEntity(restaurante);
         restauranteEntity.setEndereco(enderecoEntity);
@@ -42,7 +22,7 @@ public class RestauranteEntityMapper {
                 restaurante.nome(),
                 restaurante.horaAbertura(),
                 restaurante.horaFechamento(),
-                restaurante.capacidade(),
+                restaurante.capacidadeEmMesas(),
                 ativo,
                 null,
                 null

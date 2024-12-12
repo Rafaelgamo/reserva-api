@@ -32,7 +32,7 @@ public class RestauranteService {
         //restaurante.setEndereco(dados.endereco());
         //restaurante.setTipodecozinha(dados.tipodecozinha());
         //restaurante.setFuncionamento(dados.funcionamento());
-        restaurante.setCapacidade(dados.capacidade());
+        restaurante.setCapacidadeEmMesas(dados.capacidade());
         restaurante.setAtivo(true);
 
         //boolean restauranteJaCadastrado = restauranteRepository.existsByEndereco(endereco);

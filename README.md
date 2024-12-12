@@ -10,7 +10,7 @@
 ## Funcionalidades Básicas:
 * **Cadastro de Restaurantes:** Os restaurantes podem se cadastrar no
 sistema, fornecendo informações como nome, localização, tipo de
-cozinha, horários de funcionamento e capacidade total.
+cozinha, horários de funcionamento e capacidadeEmMesas total.
   - [ ] Cadastro / Exclusão de restaurantes
 
 

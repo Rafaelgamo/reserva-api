@@ -13,5 +13,5 @@ public record CadastroRestauranteJson(
         @NotBlank String tipoCozinha,
         @NotBlank @Pattern(regexp = RegexPatterns.HORAS_MINUTOS) String horaAbertura,
         @NotBlank @Pattern(regexp = RegexPatterns.HORAS_MINUTOS) String horaFechamento,
-        @NotNull Integer capacidade
+        @NotNull Integer capacidadeEmMesas
 ) { }

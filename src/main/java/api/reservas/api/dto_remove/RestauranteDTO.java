@@ -26,7 +26,7 @@ public record RestauranteDTO(
                         null, //restauranteEntity.getEndereco(),
                         null, //restauranteEntity.getTipoCozinha(),
                         null, //restauranteEntity.getHorarioFuncionamento(),
-                        restauranteEntity.getCapacidade(),
+                        restauranteEntity.getCapacidadeEmMesas(),
                         restauranteEntity.getAtivo()
                 );
         }

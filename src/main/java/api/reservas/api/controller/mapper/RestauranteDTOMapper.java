@@ -21,7 +21,7 @@ public class RestauranteDTOMapper {
                 cadastroRestauranteJson.tipoCozinha(),
                 Integer.parseInt(horaAbertura),
                 Integer.parseInt(horaFechamento),
-                cadastroRestauranteJson.capacidade()
+                cadastroRestauranteJson.capacidadeEmMesas()
         );
     }
 }

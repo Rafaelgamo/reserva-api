@@ -40,7 +40,7 @@ public class CadastrarRestauranteUseCase {
                 restauranteDTO.tipoCozinha(),
                 restauranteDTO.horaAbertura(),
                 restauranteDTO.horaFechamento(),
-                restauranteDTO.capacidade()
+                restauranteDTO.capacidadeEmMesas()
         );
 
         var restauranteId = restauranteGateway.cadastrar(domainRestaurante);
