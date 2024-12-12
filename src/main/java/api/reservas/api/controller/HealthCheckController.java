@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class HealthCheckController {
 
-    private static final ApiInfo info = new ApiInfo("RESERVA-API: Rodando", "/swagger-ui.html");
+    private static final ApiInfo info = new ApiInfo("RESERVA-API: Rodando", "TODO: /swagger-ui.html");
 
     @GetMapping(path = {"/", "/hello-world", "/healthcheck"})
     public ResponseEntity<ApiInfo> info() {
