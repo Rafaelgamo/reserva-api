@@ -2,13 +2,18 @@ package api.reservas.api.gateway.database.jpa;
 
 import api.reservas.api.domain.Restaurante;
 import api.reservas.api.exception.ErroInternoException;
+import api.reservas.api.exception.RecursoNaoEncontradoException;
+import api.reservas.api.exception.ValidacaoException;
 import api.reservas.api.gateway.RestauranteGateway;
 import api.reservas.api.gateway.database.jpa.entity.EnderecoEntity;
+import api.reservas.api.gateway.database.jpa.entity.RestauranteEntity;
 import api.reservas.api.gateway.database.jpa.entity.TipoCozinhaEntity;
 import api.reservas.api.gateway.database.jpa.mapper.RestauranteEntityMapper;
 import api.reservas.api.gateway.database.jpa.repository.EnderecoRepository;
 import api.reservas.api.gateway.database.jpa.repository.RestauranteRepository;
 import api.reservas.api.gateway.database.jpa.repository.TipoCozinhaRepository;
+import api.reservas.api.usecase.dto.AlterarRestauranteDTO;
+import api.reservas.api.util.ValidadorFormatoUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -57,12 +62,86 @@ public class RestauranteJpaGateway implements RestauranteGateway {
         logger.info("Checando existencia por cnpj: cnpj={}", cnpj);
         return restauranteRepository.existsByCnpj(cnpj);
     }
-
     @Override
     public void excluir(String cnpj) {
         logger.info("Excluindo restaurante: cnpj={}", cnpj);
         restauranteRepository.deleteByCnpj(cnpj);
     }
+
+    @Override
+    public void alterarPorCnpj(String cnpj, AlterarRestauranteDTO alterarRestauranteDTO) {
+        logger.info("Alterando restaurante: cnpj={}", cnpj);
+
+        if (cnpj == null) {
+            logger.warn("CNPJ tem que ser informado para alterar um restaurante.");
+            throw new ValidacaoException("CNPJ tem que ser informado para alterar um restaurante.");
+        }
+
+        var optionalRestaurante = restauranteRepository.findByCnpj(cnpj);
+        if (optionalRestaurante.isEmpty()) {
+            throw new RecursoNaoEncontradoException(RestauranteEntity.class, "cnpj", cnpj);
+        }
+
+        var restauranteEntity = optionalRestaurante.get();
+
+        var novoNome = alterarRestauranteDTO.nome();
+        if (novoNome != null) {
+            if (novoNome.trim().isBlank()) {
+                throw new ValidacaoException("Novo nome do restaurante não pode ser vazio");
+            }
+
+            restauranteEntity.setNome(novoNome);
+        }
+
+        var novoTipoCozinha = alterarRestauranteDTO.tipoCozinha();
+        if (novoTipoCozinha != null) {
+            if (novoTipoCozinha.trim().isBlank()) {
+                throw new ValidacaoException("Novo tipo de cozinha não pode ser vazio");
+            }
+
+            var tipoCozinhaEntity = buscarOuCriarTipoCozinha(novoTipoCozinha);
+            restauranteEntity.setTipoCozinha(tipoCozinhaEntity);
+        }
+
+        var novoEndereco = alterarRestauranteDTO.endereco();
+        if (novoEndereco != null) {
+            var cep = novoEndereco.cep();
+            if (!ValidadorFormatoUtil.formatoCepValido(cep)) {
+                throw new ValidacaoException("Novo cep não é válido");
+            }
+
+            var enderecoEntity = buscarOuCriarEndereco(cep, novoEndereco.numero());
+            restauranteEntity.setEndereco(enderecoEntity);
+        }
+
+        var novaHoraAbertura = alterarRestauranteDTO.horaAbertura();
+        if (novaHoraAbertura != null) {
+            if (novaHoraAbertura < 0 || novaHoraAbertura > 24) {
+                throw new ValidacaoException("Hora de abertura não pode ser negativa ou exceder 24");
+            }
+
+            restauranteEntity.setHoraAbertura(novaHoraAbertura);
+        }
+
+        var novaHoraFechamento = alterarRestauranteDTO.horaFechamento();
+        if (novaHoraFechamento != null) {
+            if (novaHoraFechamento < 0 || novaHoraFechamento > 24) {
+                throw new ValidacaoException("Hora de abertura não pode ser negativa ou exceder 24");
+            }
+
+            restauranteEntity.setHoraFechamento(novaHoraFechamento);
+        }
+
+        var novaCapacidadeEmMesas = alterarRestauranteDTO.capacidadeEmMesas();
+        if (novaCapacidadeEmMesas != null) {
+            if (novaCapacidadeEmMesas < 0) {
+                throw new ValidacaoException("Capacidade em mesas negativo");
+            }
+
+            restauranteEntity.setCapacidadeEmMesas(novaCapacidadeEmMesas);
+        }
+    }
+
 
     private TipoCozinhaEntity buscarOuCriarTipoCozinha(String nomeTipoCozinha) {
         var lowerNome = nomeTipoCozinha.toLowerCase();

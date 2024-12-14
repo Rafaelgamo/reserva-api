@@ -4,6 +4,8 @@ import api.reservas.api.gateway.database.jpa.entity.RestauranteEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 
 @Repository
 public interface RestauranteRepository extends JpaRepository<RestauranteEntity, Long> {
@@ -11,5 +13,7 @@ public interface RestauranteRepository extends JpaRepository<RestauranteEntity, 
     boolean existsByCnpj(String cnpj);
 
     void deleteByCnpj(String cnpj);
+
+    Optional<RestauranteEntity> findByCnpj(String cnpj);
 }
 
