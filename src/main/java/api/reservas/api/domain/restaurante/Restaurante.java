@@ -1,6 +1,7 @@
-package api.reservas.api.domain;
+package api.reservas.api.domain.restaurante;
 
 import api.reservas.api.exception.ValidacaoException;
+import api.reservas.api.util.ValidadorFormatoUtil;
 
 public record Restaurante (
         String nome,
@@ -17,9 +18,7 @@ public record Restaurante (
             throw new ValidacaoException("Nome do restaurante necessário.");
         }
 
-        var trimmedCnpj = cnpj.trim();
-        var cnpjDigits = trimmedCnpj.replaceAll("\\D", "");
-        if (trimmedCnpj.isEmpty() || cnpjDigits.length() != 14) {
+        if (!ValidadorFormatoUtil.formatoCnpjValido(cnpj)) {
             throw new ValidacaoException("CNPJ é necessário.");
         }
 

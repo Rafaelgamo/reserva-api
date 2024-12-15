@@ -1,6 +1,6 @@
 package api.reservas.api.controller.json;
 
-public record IdRecursoJson(
+public record IdJson(
         Long id
 ) {
 }
