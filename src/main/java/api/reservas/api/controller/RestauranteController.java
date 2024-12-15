@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/restaurante")
 public class RestauranteController {
@@ -53,6 +55,11 @@ public class RestauranteController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(new IdJson(idCadastro));
+    }
+
+    @GetMapping("/{cnpj}")
+    public ResponseEntity<List<RestauranteDTO>> buscaDeRestaurantes(@PathVariable(name = "cnpj") @Size(min = 14, max = 18) String cnpj) {
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{cnpj}")

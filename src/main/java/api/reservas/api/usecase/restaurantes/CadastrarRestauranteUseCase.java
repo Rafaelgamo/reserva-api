@@ -1,7 +1,7 @@
 package api.reservas.api.usecase.restaurantes;
 
-import api.reservas.api.domain.Endereco;
-import api.reservas.api.domain.Restaurante;
+import api.reservas.api.domain.restaurante.Endereco;
+import api.reservas.api.domain.restaurante.Restaurante;
 import api.reservas.api.exception.RecursoJaCadastradoException;
 import api.reservas.api.gateway.RestauranteGateway;
 import api.reservas.api.gateway.database.jpa.entity.RestauranteEntity;
@@ -31,7 +31,8 @@ public class CadastrarRestauranteUseCase {
             throw new RecursoJaCadastradoException(RestauranteEntity.class, "cnpj", cnpj);
         }
 
-        var endereco = new Endereco(restauranteDTO.cep(), restauranteDTO.numeroEndereco());
+        var enderecoDTO = restauranteDTO.endereco();
+        var endereco = new Endereco(enderecoDTO.cep(), enderecoDTO.numero());
 
         var domainRestaurante = new Restaurante(
                 restauranteDTO.nome(),

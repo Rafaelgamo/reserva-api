@@ -1,6 +1,6 @@
 package api.reservas.api.gateway.database.jpa;
 
-import api.reservas.api.domain.Restaurante;
+import api.reservas.api.domain.restaurante.Restaurante;
 import api.reservas.api.exception.ErroInternoException;
 import api.reservas.api.exception.RecursoNaoEncontradoException;
 import api.reservas.api.exception.ValidacaoException;
@@ -8,7 +8,7 @@ import api.reservas.api.gateway.RestauranteGateway;
 import api.reservas.api.gateway.database.jpa.entity.EnderecoEntity;
 import api.reservas.api.gateway.database.jpa.entity.RestauranteEntity;
 import api.reservas.api.gateway.database.jpa.entity.TipoCozinhaEntity;
-import api.reservas.api.gateway.database.jpa.mapper.RestauranteEntityMapper;
+import api.reservas.api.gateway.database.jpa.mapper.RestauranteMapper;
 import api.reservas.api.gateway.database.jpa.repository.EnderecoRepository;
 import api.reservas.api.gateway.database.jpa.repository.RestauranteRepository;
 import api.reservas.api.gateway.database.jpa.repository.TipoCozinhaRepository;
@@ -17,6 +17,8 @@ import api.reservas.api.util.ValidadorFormatoUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 public class RestauranteJpaGateway implements RestauranteGateway {
@@ -27,12 +29,24 @@ public class RestauranteJpaGateway implements RestauranteGateway {
     private final TipoCozinhaRepository tipoCozinhaRepository;
     private final EnderecoRepository enderecoRepository;
 
-    private final RestauranteEntityMapper restauranteEntityMapper = new RestauranteEntityMapper();
+    private final RestauranteMapper restauranteMapper = new RestauranteMapper();
 
     public RestauranteJpaGateway(RestauranteRepository restauranteRepository, TipoCozinhaRepository tipoCozinhaRepository, EnderecoRepository enderecoRepository) {
         this.restauranteRepository = restauranteRepository;
         this.tipoCozinhaRepository = tipoCozinhaRepository;
         this.enderecoRepository = enderecoRepository;
+    }
+
+    @Override
+    public Restaurante buscarPorCnpj(String cnpj) {
+        Optional<RestauranteEntity> optRestaurante = restauranteRepository.findByCnpj(cnpj);
+        if (optRestaurante.isEmpty()) {
+            return null;
+        }
+
+        var restauranteEntity = optRestaurante.get();
+        var restaurante = restauranteMapper.mapToDomain(restauranteEntity);
+        return restaurante;
     }
 
     @Override
@@ -44,7 +58,7 @@ public class RestauranteJpaGateway implements RestauranteGateway {
 
         var tipoCozinhaEntity = buscarOuCriarTipoCozinha(domainRestaurante.tipoCozinha());
 
-        var entityRestaurante = restauranteEntityMapper.mapToEntity(domainRestaurante, enderecoEntity, tipoCozinhaEntity);
+        var entityRestaurante = restauranteMapper.mapToEntity(domainRestaurante, enderecoEntity, tipoCozinhaEntity);
 
         Long restauranteId;
         try {

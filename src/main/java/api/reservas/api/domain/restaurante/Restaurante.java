@@ -1,4 +1,4 @@
-package api.reservas.api.domain;
+package api.reservas.api.domain.restaurante;
 
 import api.reservas.api.exception.ValidacaoException;
 import api.reservas.api.util.ValidadorFormatoUtil;
