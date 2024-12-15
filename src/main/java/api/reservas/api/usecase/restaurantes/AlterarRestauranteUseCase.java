@@ -25,8 +25,8 @@ public class AlterarRestauranteUseCase {
     @Transactional
     public void alterarRestaurante(String cnpj, AlterarRestauranteDTO alterarRestauranteDTO) {
         if (!ValidadorFormatoUtil.formatoCnpjValido(cnpj)) {
-            logger.warn("CNPJ tem que ser informado para alterar um restaurante.");
-            throw new ValidacaoException("CNPJ tem que ser informado para alterar um restaurante.");
+            logger.warn("CNPJ tem que ser válido para alterar um restaurante.");
+            throw new ValidacaoException("CNPJ tem que ser válido para alterar um restaurante.");
         }
 
         var cnpjCadastrado = restauranteGateway.existePorCnpj(cnpj);
