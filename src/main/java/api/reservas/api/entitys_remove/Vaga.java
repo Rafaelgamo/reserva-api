@@ -1,12 +1,9 @@
 package api.reservas.api.entitys_remove;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,9 +14,9 @@ public class Vaga  {
       @GeneratedValue(strategy = GenerationType.IDENTITY)
       private Long id;
 
-      @ManyToOne(targetEntity = Restaurante.class, fetch = FetchType.LAZY)
-      @JoinColumn(name = "id_restaurante", referencedColumnName = "id")
-      private Restaurante restaurante;
+      //@ManyToOne(targetEntity = Restaurante.class, fetch = FetchType.LAZY)
+      //@JoinColumn(name = "id_restaurante", referencedColumnName = "id")
+      private Long restaurante;
 
       private String diaReserva;
       private String horaReserva;
@@ -29,9 +26,9 @@ public class Vaga  {
       //Contrutores
       public Vaga(){}
 
-      public Vaga(Long id, Restaurante restaurante, String diaReserva, String horaReserva, Boolean vagaLivre){
+      public Vaga(Long id, Long restaurante, String diaReserva, String horaReserva, Boolean vagaLivre){
       this.id = id;
-      this.restaurante = new Restaurante();
+      this.restaurante = restaurante;
       this.diaReserva = diaReserva;
       this.horaReserva = horaReserva;
       this.vagaLivre = true;
@@ -41,8 +38,8 @@ public class Vaga  {
       public void setId(Long id){this.id = id;}
       public Long getId(){return this.id;}
 
-      public void setRestaurante(Restaurante restaurante){this.restaurante = restaurante;}
-      public Restaurante getRestaurante(){return this.restaurante;}
+      public void setRestaurante(Long restaurante){this.restaurante = restaurante;}
+      public Long getRestaurante(){return this.restaurante;}
 
       public void setDiaReserva(String diaReserva){this.diaReserva = diaReserva;}
       public String getDiaReserva(){return this.diaReserva;}

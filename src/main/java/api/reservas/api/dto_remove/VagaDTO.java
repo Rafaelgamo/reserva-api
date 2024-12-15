@@ -15,7 +15,7 @@ public record VagaDTO(
     public VagaDTO(Vaga vaga){
         this(
                 vaga.getId(),
-                vaga.getRestaurante().getId(),
+                vaga.getRestaurante(),
                 vaga.getDiaReserva(),
                 vaga.getHoraReserva(),
                 vaga.getVagaLivre()

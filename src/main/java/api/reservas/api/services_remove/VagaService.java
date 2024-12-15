@@ -1,7 +1,6 @@
 package api.reservas.api.services_remove;
 
 import api.reservas.api.dto_remove.VagaDTO;
-import api.reservas.api.entitys_remove.Restaurante;
 import api.reservas.api.entitys_remove.Vaga;
 import api.reservas.api.repository_remove.VagaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,7 @@ public class VagaService {
 
         var idRestaurante = vagaDTO.restaurante();
 
-        var restaurante = new Restaurante();
-        restaurante.setId(idRestaurante);
+        var restaurante = idRestaurante;
 
         var vaga = new Vaga();
         vaga.setRestaurante(restaurante);
