@@ -1,26 +1,17 @@
 package api.reservas.api.domain.paging;
 
-import org.springframework.data.domain.Page;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.function.Function;
 
 public class PagedResult<T> {
 
-    private PagingInfo pagingInfo;
-    private Collection<T> pagedRecords;
+    private final PagingInfo pagingInfo;
+    private final Collection<T> pagedRecords;
 
-    public PagedResult(Collection<T> pagedRecords, PagingInfo pagingInfo) {
+    protected PagedResult(Collection<T> pagedRecords, PagingInfo pagingInfo) {
         this.pagingInfo = pagingInfo;
         this.pagedRecords = pagedRecords;
-    }
-
-    public PagedResult(Page<T> projectMaterialPage, PagingInfo pagingInfo) {
-        this.pagedRecords = projectMaterialPage.getContent();
-
-        pagingInfo.setTotalPages(projectMaterialPage.getTotalPages());
-        this.pagingInfo = pagingInfo;
     }
 
     public static <U> PagedResult<U> emptyResult() {
