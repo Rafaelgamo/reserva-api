@@ -23,7 +23,7 @@ public class PagedResult<T> {
 
     public static <T> PagedResult<T> of(Page<T> result, PagingInfo pagingInfo) {
         pagingInfo.setTotalPages(result.getTotalPages());
-        return new PagedResult<>(result.getContent(), pagingInfo);
+        return new PagedResult<>(result.getContent().stream().toList(), pagingInfo);
     }
 
     public static <T> PagedResult<T> of(List<T> list) {
@@ -36,7 +36,7 @@ public class PagedResult<T> {
             return PagedResult.of(List.of());
         }
 
-        return new PagedResult<>((Collection<U>) this.pagedRecords.stream().map(converter), this.pagingInfo);
+        return new PagedResult<>((Collection<U>) this.pagedRecords.stream().map(converter).toList(), this.pagingInfo);
     }
 
     public PagingInfo getPagingInfo() {
