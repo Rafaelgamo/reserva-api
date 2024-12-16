@@ -1,6 +1,5 @@
 package api.reservas.api.gateway.database.jpa.repository;
 
-import api.reservas.api.domain.reserva.Reserva;
 import api.reservas.api.gateway.database.jpa.entity.ReservaEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,5 +20,5 @@ public interface ReservaRepository extends JpaRepository<ReservaEntity, Long> {
 
     @Query("from ReservaEntity as RV " +
             "where RV.restaurante.cnpj = ?1")
-    Page<Reserva> buscarPorCnpj(String cnpj, PageRequest pageRequest);
+    Page<ReservaEntity> buscarPorCnpj(String cnpj, PageRequest pageRequest);
 }

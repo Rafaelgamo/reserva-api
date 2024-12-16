@@ -99,8 +99,8 @@
 
     </changeSet>
 
-    <changeSet author="caio-alves" id="create-tables-reservaRemove">
-        <createTable tableName="reservaRemove">
+    <changeSet author="caio-alves" id="create-tables-reserva">
+        <createTable tableName="reserva">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
@@ -118,19 +118,51 @@
             </column>
         </createTable>
 
-        <createIndex indexName="reserva_restaurante" tableName="reservaRemove">
+        <createIndex indexName="reserva_restaurante" tableName="reserva">
             <column name="restaurante_id"/>
         </createIndex>
 
         <addForeignKeyConstraint
                 constraintName="reserva_restaurante_fk"
                 baseColumnNames="restaurante_id"
-                baseTableName="reservaRemove"
+                baseTableName="reserva"
                 referencedColumnNames="id"
                 referencedTableName="restaurante"
                 onDelete="RESTRICT"
                 onUpdate="RESTRICT"
                 validate="true" />
+    </changeSet>
+    <changeSet author="caio-alves" id="create-tables-avaliacao">
+        <createTable tableName="avaliacao">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+
+            <column name="reserva_id" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="nota_avaliacao" type="VARCHAR(80)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="comentario" type="VARCHAR(120)" />
+        </createTable>
+
+        <createIndex indexName="avaliacao_reserva" tableName="avaliacao">
+            <column name="reserva_id"/>
+        </createIndex>
+
+        <addForeignKeyConstraint
+                constraintName="avaliacao_reserva_fk"
+                baseColumnNames="reserva_id"
+                baseTableName="avaliacao"
+                referencedColumnNames="id"
+                referencedTableName="reserva"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                validate="true" />
 
     </changeSet>
+
 </databaseChangeLog>

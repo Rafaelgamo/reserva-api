@@ -1,6 +1,7 @@
 package api.reservas.api.controller;
 
 import api.reservas.api.controller.json.IdJson;
+import api.reservas.api.controller.json.ReservaComIdDTO;
 import api.reservas.api.controller.json.ReservaJson;
 import api.reservas.api.domain.paging.PagedResult;
 import api.reservas.api.domain.paging.PagingInfo;
@@ -45,25 +46,25 @@ public class ReservaController {
     }
 
     @GetMapping("/{cnpj}")
-    public ResponseEntity<PagedResult<ReservaDTO>> listarPorRestaurante(
+    public ResponseEntity<PagedResult<ReservaComIdDTO>> listarPorRestaurante(
             @PathVariable(name = "cnpj") @Size(min = 11, max = 14) String cnpj,
             @RequestParam(value = "page", required = false) Integer page,
             @RequestParam(value = "pageSize", required = false) Integer pageSize
     ) {
         var pagingInfo = PagingInfo.of(page, pageSize);
 
-        buscarReservasUseCase.buscarPorCnpj(cnpj, pagingInfo);
-        return ResponseEntity.ok(null);
+        var reservaPagedResult = buscarReservasUseCase.buscarPorCnpj(cnpj, pagingInfo);
+        return ResponseEntity.ok(reservaPagedResult);
     }
 
     @PutMapping("/{id_reserva}")
-    public ResponseEntity<Void> concluirReserva(@PathVariable(name = "id") @Positive Long id) {
+    public ResponseEntity<Void> concluirReserva(@PathVariable(name = "id_reserva") @Positive Long id) {
         alterarReservaUseCase.concluirReserva(id);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id_reserva}")
-    public ResponseEntity<Void> cancelarReserva(@PathVariable(name = "id") @Positive Long id) {
+    public ResponseEntity<Void> cancelarReserva(@PathVariable(name = "id_reserva") @Positive Long id) {
         alterarReservaUseCase.cancelarReserva(id);
         return ResponseEntity.noContent().build();
     }

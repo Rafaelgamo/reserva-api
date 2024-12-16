@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>fiap.postech.grupo14</groupId>
-	<artifactId>reservaRemove-api</artifactId>
+	<artifactId>reserva-api</artifactId>
 	<version>0.0.1</version>
-	<name>reservaRemove-api</name>
+	<name>reserva-api</name>
 	<description>api de reservas de mesas para restaurante</description>
 
 	<developers>
@@ -20,8 +20,8 @@
 
 	<properties>
 		<java.version>17</java.version>
-		<reservaRemove.api.liquibase.databasename>reservadb_${spring.profiles.active}</reservaRemove.api.liquibase.databasename>
-		<reservaRemove.api.liquibase.changeLogFilePath>src/main/resources/db/changelog/changelog-master.xml</reservaRemove.api.liquibase.changeLogFilePath>
+		<reserva.api.liquibase.databasename>reservadb_${spring.profiles.active}</reserva.api.liquibase.databasename>
+		<reserva.api.liquibase.changeLogFilePath>src/main/resources/db/changelog/changelog-master.xml</reserva.api.liquibase.changeLogFilePath>
 
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<timezone>${maven.build.timestamp.timezone}</timezone>
