@@ -4,31 +4,38 @@ import org.springframework.data.domain.Page;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.function.Function;
 
 public class PagedResult<T> {
 
-    private PagingInfo pagingInfo;
-    private Collection<T> pagedRecords;
+    private final PagingInfo pagingInfo;
+    private final Collection<T> pagedRecords;
 
-    public PagedResult(Collection<T> pagedRecords, PagingInfo pagingInfo) {
+    protected PagedResult(Collection<T> pagedRecords, PagingInfo pagingInfo) {
         this.pagingInfo = pagingInfo;
         this.pagedRecords = pagedRecords;
     }
 
-    public PagedResult(Page<T> projectMaterialPage, PagingInfo pagingInfo) {
-        this.pagedRecords = projectMaterialPage.getContent();
-
-        pagingInfo.setTotalPages(projectMaterialPage.getTotalPages());
-        this.pagingInfo = pagingInfo;
+    public static <U> PagedResult<U> emptyResult() {
+        return new PagedResult<>(Collections.emptyList(), PagingInfo.of());
     }
 
-    public static <U> PagedResult<U> emptyResult() {
-        return new PagedResult<>(Collections.emptyList(), PagingInfoBuilder.newInstance().build());
+    public static <T> PagedResult<T> of(Page<T> result, PagingInfo pagingInfo) {
+        pagingInfo.setTotalPages(result.getTotalPages());
+        return new PagedResult<>(result.getContent(), pagingInfo);
+    }
+
+    public static <T> PagedResult<T> of(List<T> list) {
+        return new PagedResult<>(list, null);
     }
 
     @SuppressWarnings("unchecked")
     public <U> PagedResult<U> map(Function<? super T, ? extends U> converter) {
+        if (pagedRecords.isEmpty()) {
+            return PagedResult.of(List.of());
+        }
+
         return new PagedResult<>((Collection<U>) this.pagedRecords.stream().map(converter), this.pagingInfo);
     }
 

@@ -6,21 +6,13 @@ import java.util.Objects;
 
 public class PagingInfo {
 
-    private Integer totalRecords;
+    private Integer totalPages;
     private Integer pageSize;
     private Integer pageIndex;
 
     protected static final Integer DEFAULT_PAGE_SIZE = 25;
     protected static final Integer DEFAULT_PAGE_INDEX = 0;
 
-    // unused
-    protected PagingInfo(Integer totalRecords, Integer pageSize, Integer pageIndex) {
-        this.totalRecords = totalRecords;
-        this.pageSize = pageSize;
-        this.pageIndex = pageIndex;
-    }
-
-    // unused
     protected PagingInfo(Integer pageIndex, Integer pageSize) {
         this.pageIndex = Objects.isNull(pageIndex)
                 ? DEFAULT_PAGE_INDEX
@@ -31,7 +23,17 @@ public class PagingInfo {
                 : pageSize;
     }
 
-    protected PagingInfo() { }
+    protected PagingInfo() {
+        this.pageIndex = DEFAULT_PAGE_INDEX;
+        this.pageSize = DEFAULT_PAGE_SIZE;
+    }
+
+    public static PagingInfo of(Integer pageNumber, Integer pageSize) {
+        return new PagingInfo(pageNumber, pageSize);
+    }
+    public static PagingInfo of() {
+        return new PagingInfo();
+    }
 
     public PageRequest toPageRequest() {
         var pageIndex = this.pageIndex != null ? this.pageIndex : 0;
@@ -39,8 +41,8 @@ public class PagingInfo {
         return PageRequest.of(pageIndex, pageSize);
     }
 
-    public Integer getTotalRecords() {
-        return totalRecords;
+    public Integer getTotalPages() {
+        return totalPages;
     }
 
     public Integer getPageSize() {
@@ -52,7 +54,7 @@ public class PagingInfo {
     }
 
     public void setTotalPages(Integer totalPages) {
-        this.totalRecords = totalPages;
+        this.totalPages = totalPages;
     }
 
     public void setPageSize(Integer pageSize) {

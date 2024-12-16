@@ -11,17 +11,17 @@
 * **Cadastro de Restaurantes:** Os restaurantes podem se cadastrar no
 sistema, fornecendo informações como nome, localização, tipo de
 cozinha, horários de funcionamento e capacidadeEmMesas total.
-  - [ ] Cadastro / Exclusão de restaurantes
+  - [X] Cadastro / Exclusão de restaurantes
 
 
 * **Reserva de Mesas:** Os usuários podem fazer reservas para datas e horários específicos.
-  - [ ] Listar horarios disponiveis para reserva
-  - [ ] Fazer reserva
-  - [ ] Cancelar reserva
+  - [ ] Listar horarios disponiveis para reservaRemove
+  - [ ] Fazer reservaRemove
+  - [ ] Cancelar reservaRemove
 
 
 * **Avaliações e Comentários:** Após a visita, os usuários podem avaliar o restaurante e deixar comentários sobre sua experiência.
-  - [ ] **POST** - /avaliar/{id-reserva} 
+  - [ ] **POST** - /avaliar/{id-reservaRemove} 
   - [ ] **GET** - /restaurantes/{id-restaurante}/avaliacoes (paginada)
 
 
@@ -31,8 +31,40 @@ cozinha, horários de funcionamento e capacidadeEmMesas total.
 
 
 * **Gerenciamento de Reservas:** Os restaurantes podem gerenciar as reservas, visualizando e atualizando o status das mesas
-    - [ ] Registrar horários disponíveis para reserva
+    - [ ] Registrar horários disponíveis para reservaRemove
     - [ ] Listar reservas (retornar o ID)
     - [ ] Registrar liberação da mesa após saída do cliente
     - [ ] ...
 
+## Rodar localmente
+Para rodar o projeto localmente, é necessário seguir o passo a passo abaixo.
+### Banco de Dados
+```shell
+docker run -d -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=reservadb_dev -p5432:5432 postgres
+```
+
+### Configurar variáveis de ambiente:
+```.dotenv
+RESERVA_PROFILE=dev
+RESERVA_DB_NAME=reservadb_dev
+RESERVA_DB_USER=postgres
+RESERVA_DB_PASSWORD=postgres
+RESERVA_DB_HOST=postgresql://localhost
+RESERVA_DB_PORT=5432
+```
+
+### Executar Aplicação
+```shell
+mvn spring-boot:run
+```
+
+## Compose
+Alternativamente pode-se executar o projeto com o Docker Compose:
+```shell
+docker compose up -d
+```
+ou
+
+```shell
+docker-compose up -d
+```

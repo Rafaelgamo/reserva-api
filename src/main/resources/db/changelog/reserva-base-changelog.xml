@@ -14,12 +14,10 @@
             <column name="cep" type="VARCHAR(8)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="numero" type="VARCHAR(10)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="numero" type="VARCHAR(10)" />
         </createTable>
 
-        <createIndex unique="true" indexName="endereco_cep" tableName="endereco">
+        <createIndex indexName="endereco_cep" tableName="endereco">
             <column name="cep"/>
         </createIndex>
 
@@ -29,13 +27,12 @@
         </createIndex>
     </changeSet>
 
-
     <changeSet author="caio-alves" id="create-tables-tipo_cozinha">
         <createTable tableName="tipo_cozinha">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="nome" type="VARCHAR(8)">
+            <column name="nome" type="VARCHAR(120)">
                 <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
@@ -50,16 +47,16 @@
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="nome" type="VARCHAR(255)">
+            <column name="nome" type="VARCHAR(120)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="cnpj" type="VARCHAR(255)">
+            <column name="cnpj" type="VARCHAR(14)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="horaAbertura" type="INT">
+            <column name="hora_abertura" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="horaFechamento" type="INT">
+            <column name="hora_fechamento" type="INT">
                 <constraints nullable="false"/>
             </column>
             <column name="capacidade_em_mesas" type="INT">
@@ -102,4 +99,38 @@
 
     </changeSet>
 
+    <changeSet author="caio-alves" id="create-tables-reservaRemove">
+        <createTable tableName="reservaRemove">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+
+            <column name="restaurante_id" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="data" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="status" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex indexName="reserva_restaurante" tableName="reservaRemove">
+            <column name="restaurante_id"/>
+        </createIndex>
+
+        <addForeignKeyConstraint
+                constraintName="reserva_restaurante_fk"
+                baseColumnNames="restaurante_id"
+                baseTableName="reservaRemove"
+                referencedColumnNames="id"
+                referencedTableName="restaurante"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                validate="true" />
+
+    </changeSet>
 </databaseChangeLog>

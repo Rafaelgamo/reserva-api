@@ -1,0 +1,58 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="initialize-endereco-table" author="caio-alves">
+        <preConditions onFail="WARN" onFailMessage="Table needs to exists for it to be initialized: 'endereco'">
+            <tableExists tableName="endereco" />
+        </preConditions>
+
+        <insert tableName="endereco">
+            <column name="id">1</column>
+            <column name="cep">12345678</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="initialize-tipo_cozinha-table" author="caio-alves">
+        <preConditions onFail="WARN" onFailMessage="Table needs to exists for it to be initialized: 'tipo_cozinha'">
+            <tableExists tableName="tipo_cozinha" />
+        </preConditions>
+
+        <insert tableName="tipo_cozinha">
+            <column name="id">1</column>
+            <column name="nome">Cozinha Brasileira</column>
+        </insert>
+
+        <insert tableName="tipo_cozinha">
+            <column name="id">2</column>
+            <column name="nome">Comida Japonesa</column>
+        </insert>
+
+        <insert tableName="tipo_cozinha">
+            <column name="id">3</column>
+            <column name="nome">Vinhos e queijos</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="initialize-restaurante-table" author="caio-alves">
+        <preConditions onFail="WARN" onFailMessage="Table needs to exists for it to be initialized: 'restaurante'" >
+            <tableExists tableName="restaurante" />
+            <tableExists tableName="endereco" />
+            <tableExists tableName="tipo_cozinha" />
+        </preConditions>
+
+        <insert tableName="restaurante">
+            <column name="id">1</column>
+            <column name="nome">Sakê</column>
+            <column name="cnpj">12345678901234</column>
+            <column name="hora_abertura">8</column>
+            <column name="hora_fechamento">18</column>
+            <column name="capacidade_em_mesas">10</column>
+
+            <column name="endereco_id">1</column>
+            <column name="tipo_cozinha_id">2</column>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
