@@ -1,7 +1,6 @@
 package api.reservas.api.gateway.database.jpa;
 
 import api.reservas.api.domain.paging.PagedResult;
-import api.reservas.api.domain.paging.PagedResultFactory;
 import api.reservas.api.domain.paging.PagingInfo;
 import api.reservas.api.domain.restaurante.Restaurante;
 import api.reservas.api.exception.ErroInternoException;
@@ -53,24 +52,30 @@ public class RestauranteJpaGateway implements RestauranteGateway {
     }
 
     @Override
+    public PagedResult<Restaurante> filtrarAbertosNoMomento(PagingInfo pagingInfo) {
+        var entitties = restauranteRepository.findAllCurrentlyOpen(pagingInfo.toPageRequest());
+        return PagedResult.of(entitties, pagingInfo);
+    }
+
+    @Override
     public PagedResult<Restaurante> filtrarPorNomeAproximado(String nome, PagingInfo pagingInfo) {
         var pagedFiltrado = restauranteRepository.findAllByNomeLike(nome, pagingInfo.toPageRequest());
         var domainRestaurantes = pagedFiltrado.map(restauranteMapper::mapToDomain);
-        return PagedResultFactory.of(domainRestaurantes, pagingInfo);
+        return PagedResult.of(domainRestaurantes, pagingInfo);
     }
 
     @Override
     public PagedResult<Restaurante> filtrarPorCep(String cep, PagingInfo pagingInfo) {
         var pagedFiltrado = restauranteRepository.findAllByCep(cep, pagingInfo.toPageRequest());
         var domainRestaurantes = pagedFiltrado.map(restauranteMapper::mapToDomain);
-        return PagedResultFactory.of(domainRestaurantes, pagingInfo);
+        return PagedResult.of(domainRestaurantes, pagingInfo);
     }
 
     @Override
     public PagedResult<Restaurante> filtrarPorTipoCozinha(String tipoCozinha, PagingInfo pagingInfo) {
         var pagedFiltrado = restauranteRepository.findAllByTipoCozinha(tipoCozinha, pagingInfo.toPageRequest());
         var domainRestaurantes = pagedFiltrado.map(restauranteMapper::mapToDomain);
-        return PagedResultFactory.of(domainRestaurantes, pagingInfo);
+        return PagedResult.of(domainRestaurantes, pagingInfo);
     }
 
     @Override

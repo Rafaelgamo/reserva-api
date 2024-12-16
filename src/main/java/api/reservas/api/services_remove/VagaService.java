@@ -1,8 +1,5 @@
 package api.reservas.api.services_remove;
 
-import api.reservas.api.dto_remove.VagaDTO;
-import api.reservas.api.entitys_remove.Vaga;
-import api.reservas.api.repository_remove.VagaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

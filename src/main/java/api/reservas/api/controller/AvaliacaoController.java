@@ -1,7 +1,6 @@
 package api.reservas.api.controller;
 
 import api.reservas.api.dto_remove.AvaliacaoDTO;
-import api.reservas.api.entitys_remove.Vaga;
 import api.reservas.api.repository_remove.AvaliacaoRepository;
 import api.reservas.api.services_remove.AvaliacaoService;
 import org.springframework.beans.factory.annotation.Autowired;

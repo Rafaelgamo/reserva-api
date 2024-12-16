@@ -8,7 +8,7 @@ import api.reservas.api.usecase.dto.AlterarRestauranteDTO;
 public interface RestauranteGateway {
 
     Restaurante buscarPorCnpj(String cnpj);
-
+    PagedResult<Restaurante> filtrarAbertosNoMomento(PagingInfo pagingInfo);
     PagedResult<Restaurante> filtrarPorNomeAproximado(String nome, PagingInfo pagingInfo);
     PagedResult<Restaurante> filtrarPorCep(String cep, PagingInfo pagingInfo);
     PagedResult<Restaurante> filtrarPorTipoCozinha(String tipoCozinha, PagingInfo pagingInfo);

@@ -1,5 +1,6 @@
 package api.reservas.api.gateway.database.jpa.repository;
 
+import api.reservas.api.domain.restaurante.Restaurante;
 import api.reservas.api.gateway.database.jpa.entity.RestauranteEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,5 +30,9 @@ public interface RestauranteRepository extends JpaRepository<RestauranteEntity, 
     @Query("from RestauranteEntity as R " +
             "where R.tipoCozinha.nome = ?1")
     Page<RestauranteEntity> findAllByTipoCozinha(String tipoCozinha, PageRequest pageRequest);
+
+    @Query("from RestauranteEntity as R " +
+            "where hour(CURRENT_TIME()) between R.horaAbertura and R.horaFechamento")
+    Page<Restaurante> findAllCurrentlyOpen(Pageable pageable);
 }
 
