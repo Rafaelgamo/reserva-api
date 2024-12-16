@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -22,7 +23,8 @@ import java.time.LocalDateTime;
 public class ReservaEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reserva_generator")
+    @SequenceGenerator(name = "reserva_generator", sequenceName = "reserva_seq", allocationSize = 1)
     private Long id;
 
     @JoinColumn(name = "restaurante_id")

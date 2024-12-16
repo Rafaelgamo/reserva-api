@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,7 +18,8 @@ import jakarta.persistence.Table;
 public class AvaliacaoEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "avaliacao_generator")
+    @SequenceGenerator(name = "avaliacao_generator", sequenceName = "avaliacao_seq", allocationSize = 1)
     private Long id;
 
     @JoinColumn(name = "reserva_id")
