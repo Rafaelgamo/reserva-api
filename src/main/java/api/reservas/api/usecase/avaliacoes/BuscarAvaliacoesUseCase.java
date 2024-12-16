@@ -1,9 +1,9 @@
 package api.reservas.api.usecase.avaliacoes;
 
-import api.reservas.api.domain.avaliacoes.Avaliacao;
 import api.reservas.api.domain.paging.PagedResult;
 import api.reservas.api.domain.paging.PagingInfo;
 import api.reservas.api.gateway.AvaliacaoGateway;
+import api.reservas.api.usecase.dto.AvaliacaoComIdDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class BuscarAvaliacoesUseCase {
         this.avaliacaoGateway = avaliacaoGateway;
     }
 
-    public PagedResult<Avaliacao> buscarPorCnpj(String cnpj, PagingInfo pagingInfo) {
+    public PagedResult<AvaliacaoComIdDTO> buscarPorCnpj(String cnpj, PagingInfo pagingInfo) {
         return avaliacaoGateway.listarPorCnpj(cnpj, pagingInfo);
     }
 

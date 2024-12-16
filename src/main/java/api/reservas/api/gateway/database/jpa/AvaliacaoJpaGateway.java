@@ -1,6 +1,5 @@
 package api.reservas.api.gateway.database.jpa;
 
-import api.reservas.api.domain.avaliacoes.Avaliacao;
 import api.reservas.api.domain.enums.NotaAvaliacao;
 import api.reservas.api.domain.paging.PagedResult;
 import api.reservas.api.domain.paging.PagingInfo;
@@ -9,6 +8,7 @@ import api.reservas.api.gateway.AvaliacaoGateway;
 import api.reservas.api.gateway.database.jpa.entity.AvaliacaoEntity;
 import api.reservas.api.gateway.database.jpa.entity.ReservaEntity;
 import api.reservas.api.gateway.database.jpa.repository.AvaliacaoRepository;
+import api.reservas.api.usecase.dto.AvaliacaoComIdDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -49,13 +49,14 @@ public class AvaliacaoJpaGateway implements AvaliacaoGateway {
     }
 
     @Override
-    public PagedResult<Avaliacao> listarPorCnpj(String cnpjRestaurante, PagingInfo pagingInfo) {
+    public PagedResult<AvaliacaoComIdDTO> listarPorCnpj(String cnpjRestaurante, PagingInfo pagingInfo) {
         var entityPage = avaliacaoRepository.buscarPorCnpj(cnpjRestaurante, pagingInfo.toPageRequest());
-        return PagedResult.of(entityPage.map(this::mapToDomain), pagingInfo);
+        return PagedResult.of(entityPage.map(this::mapToDTO), pagingInfo);
     }
 
-    private Avaliacao mapToDomain(AvaliacaoEntity avaliacaoEntity) {
-        return new Avaliacao(
+    private AvaliacaoComIdDTO mapToDTO(AvaliacaoEntity avaliacaoEntity) {
+        return new AvaliacaoComIdDTO(
+                avaliacaoEntity.getId(),
                 avaliacaoEntity.getReserva().getId(),
                 avaliacaoEntity.getNotaAvaliacao(),
                 avaliacaoEntity.getComentario()

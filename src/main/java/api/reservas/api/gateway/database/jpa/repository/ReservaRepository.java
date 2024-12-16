@@ -7,16 +7,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
-
 @Repository
 public interface ReservaRepository extends JpaRepository<ReservaEntity, Long> {
 
-    @Query("select count(*)" +
+    @Query("select count(*) " +
             "from ReservaEntity as RV " +
             "where RV.restaurante.cnpj = ?1" +
-            " AND DAY(RV.data) = DAY(?2)")
-    Integer contarReservasPorDia(String cnpj, LocalDateTime dataRequisitada);
+            "   and RV.status = 'AGENDADA'" +
+            "   and RV.data >= current timestamp")
+    Integer contarReservasNaoConcluidas(String cnpj);
 
     @Query("from ReservaEntity as RV " +
             "where RV.restaurante.cnpj = ?1")

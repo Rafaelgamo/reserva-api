@@ -1,7 +1,7 @@
 package api.reservas.api.usecase.reservas;
 
+import api.reservas.api.domain.enums.StatusReserva;
 import api.reservas.api.domain.reserva.Reserva;
-import api.reservas.api.domain.reserva.StatusReserva;
 import api.reservas.api.domain.restaurante.Restaurante;
 import api.reservas.api.exception.RecursoNaoEncontradoException;
 import api.reservas.api.exception.ValidacaoException;
@@ -51,10 +51,10 @@ public class FazerReservaUseCase {
             throw new ValidacaoException("No horário requisitado o restaurante estará fechado.");
         }
 
-        var qtdReservasParaODiaRequisitado = reservaGateway.contarReservasPorDia(cnpj, dataRequisitada);
-        if (qtdReservasParaODiaRequisitado >= restaurante.capacidadeEmMesas()) {
-            logger.debug("Sem mesas disponíveis para este dia: {}.", dataRequisitada);
-            throw new ValidacaoException("Sem mesas disponíveis para este dia.");
+        var qtdReservasEmAberto = reservaGateway.contarReservasNaoConcluidas(cnpj);
+        if (qtdReservasEmAberto >= restaurante.capacidadeEmMesas()) {
+            logger.debug("Sem mesas disponíveis no restaurante: {}.", cnpj);
+            throw new ValidacaoException("Sem mesas disponíveis.");
         }
 
         var reserva = new Reserva(

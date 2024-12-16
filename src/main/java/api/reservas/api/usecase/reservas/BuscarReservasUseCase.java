@@ -1,9 +1,9 @@
 package api.reservas.api.usecase.reservas;
 
-import api.reservas.api.controller.json.ReservaComIdDTO;
 import api.reservas.api.domain.paging.PagedResult;
 import api.reservas.api.domain.paging.PagingInfo;
 import api.reservas.api.gateway.ReservaGateway;
+import api.reservas.api.usecase.dto.ReservaComIdDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

@@ -1,5 +1,7 @@
 package api.reservas.api.domain.reserva;
 
+import api.reservas.api.domain.enums.StatusReserva;
+
 import java.time.LocalDateTime;
 
 public record Reserva (

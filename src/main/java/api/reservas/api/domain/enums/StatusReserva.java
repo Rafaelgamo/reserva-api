@@ -1,4 +1,4 @@
-package api.reservas.api.domain.reserva;
+package api.reservas.api.domain.enums;
 
 public enum StatusReserva {
 

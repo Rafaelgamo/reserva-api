@@ -24,12 +24,12 @@ public enum NotaAvaliacao {
             return descricao;
         }
 
-        public static NotaAvaliacao forId(int i) {
+        public static NotaAvaliacao of(int valor) {
             for (NotaAvaliacao nota : NotaAvaliacao.values()) {
-                if (nota.getValor() == i) {
+                if (nota.getValor() == valor) {
                     return nota;
                 }
             }
-            throw new IllegalArgumentException("Nota inválida: " + i);
+            throw new IllegalArgumentException("Nota inválida: " + valor);
         }
     }

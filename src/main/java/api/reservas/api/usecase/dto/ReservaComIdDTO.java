@@ -1,6 +1,6 @@
-package api.reservas.api.controller.json;
+package api.reservas.api.usecase.dto;
 
-import api.reservas.api.domain.reserva.StatusReserva;
+import api.reservas.api.domain.enums.StatusReserva;
 import api.reservas.api.gateway.database.jpa.entity.ReservaEntity;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -19,7 +19,7 @@ public record ReservaComIdDTO(
                 reservaEntity.getId(),
                 reservaEntity.getRestaurante().getCnpj(),
                 reservaEntity.getData(),
-                reservaEntity.getStatusReserva()
+                reservaEntity.getStatus()
         );
     }
 }

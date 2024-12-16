@@ -60,7 +60,8 @@ public class RestauranteJpaGateway implements RestauranteGateway {
 
     @Override
     public PagedResult<Restaurante> filtrarPorNomeAproximado(String nome, PagingInfo pagingInfo) {
-        var pagedFiltrado = restauranteRepository.findAllByNomeLike(nome.toLowerCase(), pagingInfo.toPageRequest());
+        var nomeLikeMatch = "%" + nome.toLowerCase() + "%";
+        var pagedFiltrado = restauranteRepository.findAllByNomeLike(nomeLikeMatch, pagingInfo.toPageRequest());
         var domainRestaurantes = pagedFiltrado.map(restauranteMapper::mapToDomain);
         return PagedResult.of(domainRestaurantes, pagingInfo);
     }

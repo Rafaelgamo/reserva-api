@@ -1,20 +1,19 @@
 package api.reservas.api.gateway.database.jpa;
 
-import api.reservas.api.controller.json.ReservaComIdDTO;
+import api.reservas.api.domain.enums.StatusReserva;
 import api.reservas.api.domain.paging.PagedResult;
 import api.reservas.api.domain.paging.PagingInfo;
 import api.reservas.api.domain.reserva.Reserva;
-import api.reservas.api.domain.reserva.StatusReserva;
 import api.reservas.api.gateway.ReservaGateway;
 import api.reservas.api.gateway.database.jpa.entity.ReservaEntity;
 import api.reservas.api.gateway.database.jpa.mapper.ReservaMapper;
 import api.reservas.api.gateway.database.jpa.repository.ReservaRepository;
 import api.reservas.api.gateway.database.jpa.repository.RestauranteRepository;
+import api.reservas.api.usecase.dto.ReservaComIdDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Component
@@ -45,18 +44,21 @@ public class ReservaJpaGateway implements ReservaGateway {
 
     @Override
     public void concluirReserva(Long idReserva) {
-        var reserva = reservaRepository.findById(idReserva);
-        if (reserva.isEmpty()) {
+        var reservaOpt = reservaRepository.findById(idReserva);
+        if (reservaOpt.isEmpty()) {
             logger.warn("Reserva não encontrada ao concluir por id: {}", idReserva);
             return;
         }
 
-        reserva.get().setStatus(StatusReserva.CONCLUIDA);
+        var reservaEntity = reservaOpt.get();
+        reservaEntity.setStatus(StatusReserva.CONCLUIDA);
+
+        reservaRepository.save(reservaEntity);
     }
 
     @Override
-    public Integer contarReservasPorDia(String cnpj, LocalDateTime dataRequisitada) {
-        return reservaRepository.contarReservasPorDia(cnpj, dataRequisitada);
+    public Integer contarReservasNaoConcluidas(String cnpj) {
+        return reservaRepository.contarReservasNaoConcluidas(cnpj);
     }
 
     @Override

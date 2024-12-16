@@ -1,7 +1,9 @@
 package api.reservas.api.usecase.avaliacoes;
 
 import api.reservas.api.domain.enums.NotaAvaliacao;
+import api.reservas.api.domain.enums.StatusReserva;
 import api.reservas.api.exception.RecursoNaoEncontradoException;
+import api.reservas.api.exception.ValidacaoException;
 import api.reservas.api.gateway.AvaliacaoGateway;
 import api.reservas.api.gateway.ReservaGateway;
 import api.reservas.api.gateway.database.jpa.entity.ReservaEntity;
@@ -29,6 +31,12 @@ public class AvaliarReservaUseCase {
             logger.debug("Reserva não encontrada para avaliação: {}", idReserva);
             throw new RecursoNaoEncontradoException(ReservaEntity.class, "id", idReserva);
         }
+
+        if (!StatusReserva.CONCLUIDA.equals(reserva.statusReserva())) {
+            logger.debug("Não é possível avaliar reservas não CONCLUIDAs: status={}", reserva.statusReserva());
+            throw new ValidacaoException("Não é possível avaliar reservas não CONCLUIDAs");
+        }
+
         avaliacaoGateway.fazerAvaliacao(idReserva, notaAvaliacao, comentario);
     }
 }

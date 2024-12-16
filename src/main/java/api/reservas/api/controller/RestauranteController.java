@@ -49,6 +49,7 @@ public class RestauranteController {
     }
 
     @PostMapping
+    @Operation(description = "Cadastrar restaurante")
     public ResponseEntity<IdJson> cadastro(@RequestBody @Valid CadastroRestauranteJson cadastroRestauranteJson) {
         var restauranteDTO = restauranteMapper.mapToDTO(cadastroRestauranteJson);
 
@@ -59,8 +60,8 @@ public class RestauranteController {
                 .body(new IdJson(idCadastro));
     }
 
-    @Operation(description = "Listar todos os restaurantes abertos no momento")
     @GetMapping
+    @Operation(description = "Listar todos os restaurantes abertos no momento")
     public ResponseEntity<PagedResult<RestauranteDTO>> listarAbertosAgora(
             @RequestParam(value = "page", required = false) Integer page,
             @RequestParam(value = "pageSize", required = false) Integer pageSize
@@ -73,12 +74,14 @@ public class RestauranteController {
     }
 
     @GetMapping("/{cnpj}")
+    @Operation(description = "Buscar restaurante por CNPJ")
     public ResponseEntity<RestauranteDTO> buscarPorCnpj(@PathVariable(name = "cnpj") @Size(min = 14, max = 18) String cnpj) {
         var domainRestaurante = buscarRestaurantesUseCase.buscarPorCnpj(cnpj);
         return ResponseEntity.ok(restauranteMapper.mapToDTO(domainRestaurante));
     }
 
     @GetMapping("/filtro/nome/{nome}")
+    @Operation(description = "Filtrar restaurantes por nome")
     public ResponseEntity<PagedResult<RestauranteDTO>> filtrarRestaurantesPorNome(
             @PathVariable(name = "nome") String nome,
             @RequestParam(value = "page", required = false) Integer page,
@@ -93,8 +96,9 @@ public class RestauranteController {
     }
 
     @GetMapping("/filtro/cep/{cep}")
+    @Operation(description = "Filtrar restaurantes por CEP")
     public ResponseEntity<PagedResult<RestauranteDTO>> filtrarRestaurantesPorCep(
-            @PathVariable(name = "cep") String cep,
+            @PathVariable(name = "cep") @Size(min = 8, max = 9) String cep,
             @RequestParam(value = "page", required = false) Integer page,
             @RequestParam(value = "pageSize", required = false) Integer pageSize
     ) {
@@ -107,6 +111,7 @@ public class RestauranteController {
     }
 
     @GetMapping("/filtro/tipocozinha/{tipoCozinha}")
+    @Operation(description = "Filtrar restaurantes por tipo de cozinha")
     public ResponseEntity<PagedResult<RestauranteDTO>> filtrarRestaurantesPorTipoCozinha(
             @PathVariable(name = "tipoCozinha") String tipoCozinha,
             @RequestParam(value = "page", required = false) Integer page,
@@ -121,6 +126,7 @@ public class RestauranteController {
     }
 
     @PutMapping("/{cnpj}")
+    @Operation(description = "Alterar dados restaurante")
     public ResponseEntity<Void> alterarRestaurante(
             @PathVariable(name = "cnpj") @Size(min = 14, max = 18) String cnpj, @RequestBody AlterarRestauranteJson alterarRestauranteJson) {
         var alterarRestauranteDTO = new AlterarRestauranteDTO(alterarRestauranteJson);
@@ -129,6 +135,7 @@ public class RestauranteController {
     }
 
     @DeleteMapping("/{cnpj}")
+    @Operation(description = "Excluir restaurante")
     public ResponseEntity<Void> removerRestaurante(@PathVariable(name = "cnpj")
                                                        @Size(min = 14, max = 18) String cnpj) {
         excluirRestauranteUseCase.excluirRestaurante(cnpj);
