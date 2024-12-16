@@ -15,9 +15,9 @@ cozinha, horários de funcionamento e capacidadeEmMesas total.
 
 
 * **Reserva de Mesas:** Os usuários podem fazer reservas para datas e horários específicos.
-  - [ ] Listar horarios disponiveis para reservaRemove
-  - [ ] Fazer reservaRemove
-  - [ ] Cancelar reservaRemove
+  - [X] Fazer reserva
+  - [X] Cancelar reserva
+  - [X] Concluir reserva
 
 
 * **Avaliações e Comentários:** Após a visita, os usuários podem avaliar o restaurante e deixar comentários sobre sua experiência.
@@ -26,15 +26,13 @@ cozinha, horários de funcionamento e capacidadeEmMesas total.
 
 
 * **Busca de Restaurantes:** Os usuários podem buscar restaurantes por nome, localização ou tipo de cozinha.
-  - Criar índices para esses campos 
-  - Ordenação não necessária
+  - [X] Criar índices para esses campos 
+    - Ordenação não necessária
 
 
 * **Gerenciamento de Reservas:** Os restaurantes podem gerenciar as reservas, visualizando e atualizando o status das mesas
-    - [ ] Registrar horários disponíveis para reservaRemove
-    - [ ] Listar reservas (retornar o ID)
-    - [ ] Registrar liberação da mesa após saída do cliente
-    - [ ] ...
+    - [X] Listar reservas (retornar o ID)
+    - [X] Registrar liberação da mesa após saída do cliente
 
 ## Rodar localmente
 Para rodar o projeto localmente, é necessário seguir o passo a passo abaixo.
