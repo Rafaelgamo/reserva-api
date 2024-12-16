@@ -21,7 +21,7 @@ cozinha, horários de funcionamento e capacidadeEmMesas total.
 
 
 * **Avaliações e Comentários:** Após a visita, os usuários podem avaliar o restaurante e deixar comentários sobre sua experiência.
-  - [ ] **POST** - /avaliar/{id-reservaRemove} 
+  - [x] **POST** - /avaliacao/{id-reserva} 
   - [ ] **GET** - /restaurantes/{id-restaurante}/avaliacoes (paginada)
 
 
