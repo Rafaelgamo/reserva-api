@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,7 +13,8 @@ import jakarta.persistence.Table;
 public class TipoCozinhaEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipo_cozinha_generator")
+    @SequenceGenerator(name = "tipo_cozinha_generator", sequenceName = "tipo_cozinha_seq", allocationSize = 1)
     private Long id;
 
     @Column(unique = true, nullable = false)

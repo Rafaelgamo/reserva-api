@@ -27,7 +27,7 @@ public interface RestauranteRepository extends JpaRepository<RestauranteEntity, 
     Page<RestauranteEntity> findAllByCep(String cep, PageRequest pageRequest);
 
     @Query("from RestauranteEntity as R " +
-            "where R.tipoCozinha.nome = ?1")
+            "where lower(R.tipoCozinha.nome) = lower(?1)")
     Page<RestauranteEntity> findAllByTipoCozinha(String tipoCozinha, PageRequest pageRequest);
 
     @Query("from RestauranteEntity as R " +

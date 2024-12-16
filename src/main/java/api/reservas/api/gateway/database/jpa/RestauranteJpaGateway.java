@@ -60,7 +60,7 @@ public class RestauranteJpaGateway implements RestauranteGateway {
 
     @Override
     public PagedResult<Restaurante> filtrarPorNomeAproximado(String nome, PagingInfo pagingInfo) {
-        var pagedFiltrado = restauranteRepository.findAllByNomeLike(nome, pagingInfo.toPageRequest());
+        var pagedFiltrado = restauranteRepository.findAllByNomeLike(nome.toLowerCase(), pagingInfo.toPageRequest());
         var domainRestaurantes = pagedFiltrado.map(restauranteMapper::mapToDomain);
         return PagedResult.of(domainRestaurantes, pagingInfo);
     }
@@ -74,7 +74,7 @@ public class RestauranteJpaGateway implements RestauranteGateway {
 
     @Override
     public PagedResult<Restaurante> filtrarPorTipoCozinha(String tipoCozinha, PagingInfo pagingInfo) {
-        var pagedFiltrado = restauranteRepository.findAllByTipoCozinha(tipoCozinha, pagingInfo.toPageRequest());
+        var pagedFiltrado = restauranteRepository.findAllByTipoCozinha(tipoCozinha.toLowerCase(), pagingInfo.toPageRequest());
         var domainRestaurantes = pagedFiltrado.map(restauranteMapper::mapToDomain);
         return PagedResult.of(domainRestaurantes, pagingInfo);
     }

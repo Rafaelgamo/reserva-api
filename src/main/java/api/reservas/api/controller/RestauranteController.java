@@ -12,6 +12,7 @@ import api.reservas.api.usecase.restaurantes.AlterarRestauranteUseCase;
 import api.reservas.api.usecase.restaurantes.BuscarRestaurantesUseCase;
 import api.reservas.api.usecase.restaurantes.CadastrarRestauranteUseCase;
 import api.reservas.api.usecase.restaurantes.ExcluirRestauranteUseCase;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 import org.springframework.http.HttpStatus;
@@ -58,6 +59,7 @@ public class RestauranteController {
                 .body(new IdJson(idCadastro));
     }
 
+    @Operation(description = "Listar todos os restaurantes abertos no momento")
     @GetMapping
     public ResponseEntity<PagedResult<RestauranteDTO>> listarAbertosAgora(
             @RequestParam(value = "page", required = false) Integer page,

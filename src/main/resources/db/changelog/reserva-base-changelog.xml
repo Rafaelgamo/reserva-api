@@ -12,14 +12,12 @@
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="cep" type="VARCHAR(8)">
-                <constraints nullable="false" unique="true"/>
+                <constraints nullable="false"/>
             </column>
             <column name="numero" type="VARCHAR(10)" />
         </createTable>
 
-        <createIndex indexName="endereco_cep" tableName="endereco">
-            <column name="cep"/>
-        </createIndex>
+        <createSequence sequenceName="endereco_seq" startValue="2" incrementBy="1" dataType="BIGINT" cacheSize="1"/>
 
         <createIndex unique="true" indexName="endereco_numero_cep" tableName="endereco">
             <column name="cep"/>
@@ -36,6 +34,8 @@
                 <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
+
+        <createSequence sequenceName="tipo_cozinha_seq" startValue="4" incrementBy="1" dataType="BIGINT" cacheSize="1"/>
 
         <createIndex unique="true" indexName="tipo_cozinha_nome" tableName="tipo_cozinha">
             <column name="nome"/>
@@ -72,6 +72,8 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+
+        <createSequence sequenceName="restaurante_seq" startValue="2" incrementBy="1" dataType="BIGINT" cacheSize="1"/>
 
         <createIndex unique="true" indexName="restaurante_nome" tableName="restaurante">
             <column name="nome"/>
@@ -118,6 +120,8 @@
             </column>
         </createTable>
 
+        <createSequence sequenceName="reserva_seq" startValue="2" incrementBy="1" dataType="BIGINT" cacheSize="1"/>
+
         <createIndex indexName="reserva_restaurante" tableName="reserva">
             <column name="restaurante_id"/>
         </createIndex>
@@ -132,6 +136,7 @@
                 onUpdate="RESTRICT"
                 validate="true" />
     </changeSet>
+
     <changeSet author="caio-alves" id="create-tables-avaliacao">
         <createTable tableName="avaliacao">
             <column autoIncrement="true" name="id" type="BIGINT">
@@ -148,6 +153,8 @@
 
             <column name="comentario" type="VARCHAR(120)" />
         </createTable>
+
+        <createSequence sequenceName="avaliacao_seq" startValue="2" incrementBy="1" dataType="BIGINT" cacheSize="1"/>
 
         <createIndex indexName="avaliacao_reserva" tableName="avaliacao">
             <column name="reserva_id"/>
