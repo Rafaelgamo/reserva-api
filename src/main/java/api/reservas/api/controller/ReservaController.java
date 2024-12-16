@@ -58,13 +58,13 @@ public class ReservaController {
     }
 
     @PutMapping("/{id_reserva}")
-    public ResponseEntity<Void> concluirReserva(@PathVariable(name = "id") @Positive Long id) {
+    public ResponseEntity<Void> concluirReserva(@PathVariable(name = "id_reserva") @Positive Long id) {
         alterarReservaUseCase.concluirReserva(id);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id_reserva}")
-    public ResponseEntity<Void> cancelarReserva(@PathVariable(name = "id") @Positive Long id) {
+    public ResponseEntity<Void> cancelarReserva(@PathVariable(name = "id_reserva") @Positive Long id) {
         alterarReservaUseCase.cancelarReserva(id);
         return ResponseEntity.noContent().build();
     }
