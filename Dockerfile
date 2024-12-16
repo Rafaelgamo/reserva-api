@@ -24,4 +24,4 @@ COPY --from=build /target .
 
 EXPOSE 8080:8080
 
-ENTRYPOINT ["java", "-jar", "reservaRemove-api-0.0.1.jar"]
+ENTRYPOINT ["java", "-jar", "reserva-api-0.0.1.jar"]
