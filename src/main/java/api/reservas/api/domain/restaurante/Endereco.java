@@ -14,10 +14,6 @@ public record Endereco(
             throw new ValidacaoException("CEP é necessário e precisa ter 8 dígitos");
         }
 
-        if (numero.trim().isEmpty()) {
-            throw new ValidacaoException("Número do endereço é necessário");
-        }
-
         this.cep = cep;
         this.numero = numero;
     }

@@ -54,7 +54,8 @@ public class RestauranteJpaGateway implements RestauranteGateway {
     @Override
     public PagedResult<Restaurante> filtrarAbertosNoMomento(PagingInfo pagingInfo) {
         var entitties = restauranteRepository.findAllCurrentlyOpen(pagingInfo.toPageRequest());
-        return PagedResult.of(entitties, pagingInfo);
+        var domainRestaurantes = entitties.map(restauranteMapper::mapToDomain);
+        return PagedResult.of(domainRestaurantes, pagingInfo);
     }
 
     @Override

@@ -16,7 +16,7 @@ public class ValidadorFormatoUtil {
         }
 
         var cnpjDigits = somenteDigitos(cnpj);
-        return cnpjDigits.length() != 14;
+        return cnpjDigits.length() == 14;
     }
 
     public static String somenteDigitos(String texto) {

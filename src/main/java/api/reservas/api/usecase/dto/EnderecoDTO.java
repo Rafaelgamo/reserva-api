@@ -9,7 +9,7 @@ public record EnderecoDTO(
         String numero
 ) {
     public EnderecoDTO {
-        if (cep == null || cep.isBlank() || numero == null || numero.isBlank() || !ValidadorFormatoUtil.formatoCepValido(cep)) {
+        if (cep == null || cep.isBlank() || !ValidadorFormatoUtil.formatoCepValido(cep)) {
             throw new ValidacaoException("Erro ao criar endereco com: cep=" + cep + ", numero=" + numero);
         }
     }
