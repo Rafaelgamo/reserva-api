@@ -1,9 +1,10 @@
 package api.reservas.api.controller.json;
 
-import api.reservas.api.domain.enums.NotaAvaliacao;
+import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Range;
 
 public record AvaliacaoJson(
-        NotaAvaliacao notaAvaliacao,
+        @NotNull @Range(min = 1, max = 5) Integer notaAvaliacao,
         String comentario
 ) {
 }

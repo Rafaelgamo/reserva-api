@@ -1,10 +1,10 @@
 package api.reservas.api.controller;
 
 import api.reservas.api.controller.json.IdJson;
-import api.reservas.api.controller.json.ReservaComIdDTO;
 import api.reservas.api.controller.json.ReservaJson;
 import api.reservas.api.domain.paging.PagedResult;
 import api.reservas.api.domain.paging.PagingInfo;
+import api.reservas.api.usecase.dto.ReservaComIdDTO;
 import api.reservas.api.usecase.dto.ReservaDTO;
 import api.reservas.api.usecase.reservas.AlterarReservaUseCase;
 import api.reservas.api.usecase.reservas.BuscarReservasUseCase;

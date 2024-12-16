@@ -1,4 +1,4 @@
-package api.reservas.api.controller.json;
+package api.reservas.api.usecase.dto;
 
 import api.reservas.api.domain.enums.StatusReserva;
 import api.reservas.api.gateway.database.jpa.entity.ReservaEntity;

@@ -1,9 +1,9 @@
 package api.reservas.api.gateway;
 
-import api.reservas.api.controller.json.ReservaComIdDTO;
 import api.reservas.api.domain.paging.PagedResult;
 import api.reservas.api.domain.paging.PagingInfo;
 import api.reservas.api.domain.reserva.Reserva;
+import api.reservas.api.usecase.dto.ReservaComIdDTO;
 
 public interface ReservaGateway {
     void cancelarReserva(Long idReserva);
