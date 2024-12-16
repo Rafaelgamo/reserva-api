@@ -7,6 +7,7 @@ import api.reservas.api.domain.paging.PagingInfo;
 import api.reservas.api.usecase.avaliacoes.AvaliarReservaUseCase;
 import api.reservas.api.usecase.avaliacoes.BuscarAvaliacoesUseCase;
 import api.reservas.api.usecase.avaliacoes.ExcluirAvaliacaoUseCase;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,7 @@ public class AvaliacaoController {
         this.excluirAvaliacaoUseCase = excluirAvaliacaoUseCase;
     }
 
+    @Operation(description = "Avaliar experiência na reserva")
     @PostMapping("/{id_reserva}")
     public ResponseEntity<Void> fazerAvaliacao(
             @PathVariable("id_reserva") @Positive Long idReserva,
@@ -43,6 +45,7 @@ public class AvaliacaoController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @Operation(description = "Listar avaliações do restaurante")
     @GetMapping("/{cnpj}")
     public ResponseEntity<PagedResult<Avaliacao>> buscarPorCnpj(
             @PathVariable("cnpj") String cnpj,
@@ -54,6 +57,8 @@ public class AvaliacaoController {
         return ResponseEntity.ok(avaliacaoPagedResult);
     }
 
+
+    @Operation(description = "Excluir avaliação")
     @DeleteMapping("/{id_avaliacao}")
     public ResponseEntity<Void> excluirAvaliacao(@PathVariable @Positive Long idAvaliacao) {
         excluirAvaliacaoUseCase.excluirAvaliacao(idAvaliacao);
