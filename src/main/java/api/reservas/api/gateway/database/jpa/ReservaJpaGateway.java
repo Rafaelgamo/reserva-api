@@ -1,5 +1,6 @@
 package api.reservas.api.gateway.database.jpa;
 
+import api.reservas.api.controller.json.ReservaComIdDTO;
 import api.reservas.api.domain.paging.PagedResult;
 import api.reservas.api.domain.paging.PagingInfo;
 import api.reservas.api.domain.reserva.Reserva;
@@ -10,7 +11,6 @@ import api.reservas.api.gateway.database.jpa.repository.ReservaRepository;
 import api.reservas.api.gateway.database.jpa.repository.RestauranteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -65,8 +65,8 @@ public class ReservaJpaGateway implements ReservaGateway {
     }
 
     @Override
-    public PagedResult<Reserva> buscarPorCnpj(String cnpj, PagingInfo pagingInfo) {
-        Page<Reserva> pageReservas = reservaRepository.buscarPorCnpj(cnpj, pagingInfo.toPageRequest());
-        return PagedResult.of(pageReservas, pagingInfo);
+    public PagedResult<ReservaComIdDTO> buscarPorCnpj(String cnpj, PagingInfo pagingInfo) {
+        var pageReservas = reservaRepository.buscarPorCnpj(cnpj, pagingInfo.toPageRequest());
+        return PagedResult.of(pageReservas.map(ReservaComIdDTO::new), pagingInfo);
     }
 }

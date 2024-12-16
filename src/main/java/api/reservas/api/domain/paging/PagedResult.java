@@ -46,4 +46,5 @@ public class PagedResult<T> {
     public Collection<T> getPagedRecords() {
         return pagedRecords;
     }
+
 }

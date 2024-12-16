@@ -1,8 +1,8 @@
 package api.reservas.api.usecase.reservas;
 
+import api.reservas.api.controller.json.ReservaComIdDTO;
 import api.reservas.api.domain.paging.PagedResult;
 import api.reservas.api.domain.paging.PagingInfo;
-import api.reservas.api.domain.reserva.Reserva;
 import api.reservas.api.gateway.ReservaGateway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ public class BuscarReservasUseCase {
         this.reservaGateway = reservaGateway;
     }
 
-    public PagedResult<Reserva> buscarPorCnpj(String cnpj, PagingInfo pagingInfo) {
+    public PagedResult<ReservaComIdDTO> buscarPorCnpj(String cnpj, PagingInfo pagingInfo) {
         return reservaGateway.buscarPorCnpj(cnpj, pagingInfo);
     }
 }
