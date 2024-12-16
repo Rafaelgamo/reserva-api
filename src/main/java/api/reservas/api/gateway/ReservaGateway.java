@@ -17,4 +17,6 @@ public interface ReservaGateway {
     Long cadastrarReserva(String cnpj, Reserva reserva);
 
     PagedResult<ReservaComIdDTO> buscarPorCnpj(String cnpj, PagingInfo pagingInfo);
+
+    Reserva buscarPorId(Long idReserva);
 }

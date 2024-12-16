@@ -12,4 +12,12 @@ public class ReservaMapper {
         entity.setStatus(reserva.statusReserva());
         return entity;
     }
+
+    public Reserva mapToDomain(ReservaEntity reservaEntity) {
+        return new Reserva(
+                reservaEntity.getRestaurante().getCnpj(),
+                reservaEntity.getData(),
+                reservaEntity.getStatusReserva()
+        );
+    }
 }
