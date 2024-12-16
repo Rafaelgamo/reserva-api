@@ -1,7 +1,7 @@
 package api.reservas.api.gateway.database.jpa.entity;
 
 
-import api.reservas.api.domain.reserva.StatusReserva;
+import api.reservas.api.domain.enums.StatusReserva;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -32,16 +32,16 @@ public class ReservaEntity {
     private RestauranteEntity restaurante;
 
     @Enumerated(EnumType.STRING)
-    private StatusReserva statusReserva;
+    private StatusReserva status;
 
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime data;
 
 
-    public ReservaEntity(Long id, RestauranteEntity restaurante, StatusReserva statusReserva, LocalDateTime data) {
+    public ReservaEntity(Long id, RestauranteEntity restaurante, StatusReserva status, LocalDateTime data) {
         this.id = id;
         this.restaurante = restaurante;
-        this.statusReserva = statusReserva;
+        this.status = status;
         this.data = data;
     }
 
@@ -71,15 +71,11 @@ public class ReservaEntity {
         this.restaurante = restaurante;
     }
 
-    public StatusReserva getStatusReserva() {
-        return statusReserva;
-    }
-
-    public void setStatusReserva(StatusReserva statusReserva) {
-        this.statusReserva = statusReserva;
+    public StatusReserva getStatus() {
+        return status;
     }
 
     public void setStatus(StatusReserva statusReserva) {
-        this.statusReserva = statusReserva;
+        this.status = statusReserva;
     }
 }

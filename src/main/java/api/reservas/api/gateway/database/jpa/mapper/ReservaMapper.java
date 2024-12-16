@@ -17,7 +17,7 @@ public class ReservaMapper {
         return new Reserva(
                 reservaEntity.getRestaurante().getCnpj(),
                 reservaEntity.getData(),
-                reservaEntity.getStatusReserva()
+                reservaEntity.getStatus()
         );
     }
 }
