@@ -3,7 +3,9 @@ package api.reservas.api.usecase.restaurantes;
 import api.reservas.api.domain.paging.PagedResult;
 import api.reservas.api.domain.paging.PagingInfo;
 import api.reservas.api.domain.restaurante.Restaurante;
+import api.reservas.api.exception.ValidacaoException;
 import api.reservas.api.gateway.RestauranteGateway;
+import api.reservas.api.util.ValidadorFormatoUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -28,7 +30,12 @@ public class BuscarRestaurantesUseCase {
     }
 
     public PagedResult<Restaurante> filtrarPorCep(String cep, PagingInfo pagingInfo) {
-        return restauranteGateway.filtrarPorCep(cep, pagingInfo);
+        var digitosCep = ValidadorFormatoUtil.somenteDigitos(cep);
+        if (!ValidadorFormatoUtil.formatoCepValido(cep)) {
+            throw new ValidacaoException("CEP é necessário e precisa ter 8 dígitos");
+        }
+
+        return restauranteGateway.filtrarPorCep(digitosCep, pagingInfo);
     }
 
     public PagedResult<Restaurante> filtrarPorTipoCozinha(String tipoCozinha, PagingInfo pagingInfo) {

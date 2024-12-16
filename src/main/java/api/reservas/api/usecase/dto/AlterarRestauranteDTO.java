@@ -13,7 +13,9 @@ public record AlterarRestauranteDTO (
     public AlterarRestauranteDTO(AlterarRestauranteJson alterarRestauranteJson) {
         this(
                 alterarRestauranteJson.nome(),
-                new EnderecoDTO(alterarRestauranteJson.endereco()),
+                alterarRestauranteJson.endereco() != null
+                    ? new EnderecoDTO(alterarRestauranteJson.endereco())
+                    : null,
                 alterarRestauranteJson.tipoCozinha(),
                 alterarRestauranteJson.horaAbertura(),
                 alterarRestauranteJson.horaFechamento(),

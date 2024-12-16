@@ -94,7 +94,7 @@ public class RestauranteController {
 
     @GetMapping("/filtro/cep/{cep}")
     public ResponseEntity<PagedResult<RestauranteDTO>> filtrarRestaurantesPorCep(
-            @PathVariable(name = "cep") String cep,
+            @PathVariable(name = "cep") @Size(min = 8, max = 9) String cep,
             @RequestParam(value = "page", required = false) Integer page,
             @RequestParam(value = "pageSize", required = false) Integer pageSize
     ) {
