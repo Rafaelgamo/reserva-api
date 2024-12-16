@@ -1,7 +1,8 @@
-package api.reservas.api.entitys_remove;
+package api.reservas.api.gateway.database.jpa.entity;
 
 import api.reservas.api.domain.enums.NotaAvaliacao;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,21 +10,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "avaliar")
-public class Avaliacao {
+@Table(name = "avaliacao")
+public class AvaliacaoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private NotaAvaliacao notaAvaliacao;
 
     private String comentario;
 
-    public Avaliacao(){}
+    public AvaliacaoEntity() {}
 
-    public Avaliacao(Long id, NotaAvaliacao notaAvaliacao, String comentario){
+    public AvaliacaoEntity(Long id, NotaAvaliacao notaAvaliacao, String comentario){
         this.id = id;
         this.notaAvaliacao = notaAvaliacao;
         this.comentario = comentario;
@@ -37,7 +38,4 @@ public class Avaliacao {
 
     public void setComentario(String comentario) {this.comentario = comentario;}
     public String getComentario(){return comentario;}
-
 }
-
-
