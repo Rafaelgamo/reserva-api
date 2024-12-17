@@ -1,7 +1,6 @@
 package api.reservas.api.controller;
 
 import api.reservas.api.controller.json.AvaliacaoJson;
-import api.reservas.api.domain.avaliacoes.Avaliacao;
 import api.reservas.api.domain.enums.NotaAvaliacao;
 import api.reservas.api.domain.paging.PagedResult;
 import api.reservas.api.domain.paging.PagingInfo;
@@ -56,7 +55,7 @@ public class AvaliacaoController {
             @RequestParam(value = "pageSize", required = false) Integer pageSize
     ) {
         var pagingInfo = PagingInfo.of(page, pageSize);
-        PagedResult<Avaliacao> avaliacaoPagedResult = buscarAvaliacoesUseCase.buscarPorCnpj(cnpj, pagingInfo);
+        var avaliacaoPagedResult = buscarAvaliacoesUseCase.buscarPorCnpj(cnpj, pagingInfo);
         return ResponseEntity.ok(avaliacaoPagedResult);
     }
 
