@@ -9,29 +9,29 @@ import org.springframework.stereotype.Service;
 @Service
 public class AlterarReservaUseCase {
 
-    private static final Logger logger = LoggerFactory.getLogger(AlterarReservaUseCase.class);
+	private static final Logger logger = LoggerFactory.getLogger(AlterarReservaUseCase.class);
 
-    private final ReservaGateway reservaGateway;
+	private final ReservaGateway reservaGateway;
 
-    public AlterarReservaUseCase(ReservaGateway reservaGateway) {
-        this.reservaGateway = reservaGateway;
-    }
+	public AlterarReservaUseCase(ReservaGateway reservaGateway) {
+		this.reservaGateway = reservaGateway;
+	}
 
-    public void cancelarReserva(Long idReserva) {
-        if (idReserva == null || idReserva < 1) {
-            logger.warn("ID da reserva inválido: id={}", idReserva);
-            throw new ValidacaoException("ID da reserva inválido");
-        }
+	public void cancelarReserva(Long idReserva) {
+		if (idReserva == null || idReserva < 1) {
+			logger.warn("ID da reserva inválido: id={}", idReserva);
+			throw new ValidacaoException("ID da reserva inválido");
+		}
 
-        reservaGateway.cancelarReserva(idReserva);
-    }
+		reservaGateway.cancelarReserva(idReserva);
+	}
 
-    public void concluirReserva(Long idReserva) {
-        if (idReserva == null || idReserva < 1) {
-            logger.warn("ID da reserva inválido: id={}", idReserva);
-            throw new ValidacaoException("ID da reserva inválido");
-        }
+	public void concluirReserva(Long idReserva) {
+		if (idReserva == null || idReserva < 1) {
+			logger.warn("ID da reserva inválido: id={}", idReserva);
+			throw new ValidacaoException("ID da reserva inválido");
+		}
 
-        reservaGateway.concluirReserva(idReserva);
-    }
+		reservaGateway.concluirReserva(idReserva);
+	}
 }

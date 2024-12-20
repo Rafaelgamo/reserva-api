@@ -14,29 +14,29 @@ import org.springframework.stereotype.Service;
 @Service
 public class AvaliarReservaUseCase {
 
-    private static final Logger logger = LoggerFactory.getLogger(AvaliarReservaUseCase.class);
+	private static final Logger logger = LoggerFactory.getLogger(AvaliarReservaUseCase.class);
 
-    private final AvaliacaoGateway avaliacaoGateway;
+	private final AvaliacaoGateway avaliacaoGateway;
 
-    private final ReservaGateway reservaGateway;
+	private final ReservaGateway reservaGateway;
 
-    public AvaliarReservaUseCase(AvaliacaoGateway avaliacaoGateway, ReservaGateway reservaGateway) {
-        this.avaliacaoGateway = avaliacaoGateway;
-        this.reservaGateway = reservaGateway;
-    }
+	public AvaliarReservaUseCase(AvaliacaoGateway avaliacaoGateway, ReservaGateway reservaGateway) {
+		this.avaliacaoGateway = avaliacaoGateway;
+		this.reservaGateway = reservaGateway;
+	}
 
-    public void fazerAvaliacao(Long idReserva, NotaAvaliacao notaAvaliacao, String comentario) {
-        var reserva = reservaGateway.buscarPorId(idReserva);
-        if (reserva == null) {
-            logger.debug("Reserva não encontrada para avaliação: {}", idReserva);
-            throw new RecursoNaoEncontradoException(ReservaEntity.class, "id", idReserva);
-        }
+	public void fazerAvaliacao(Long idReserva, NotaAvaliacao notaAvaliacao, String comentario) {
+		var reserva = reservaGateway.buscarPorId(idReserva);
+		if (reserva == null) {
+			logger.debug("Reserva não encontrada para avaliação: {}", idReserva);
+			throw new RecursoNaoEncontradoException(ReservaEntity.class, "id", idReserva);
+		}
 
-        if (!StatusReserva.CONCLUIDA.equals(reserva.statusReserva())) {
-            logger.debug("Não é possível avaliar reservas não CONCLUIDAs: status={}", reserva.statusReserva());
-            throw new ValidacaoException("Não é possível avaliar reservas não CONCLUIDAs");
-        }
+		if (!StatusReserva.CONCLUIDA.equals(reserva.statusReserva())) {
+			logger.debug("Não é possível avaliar reservas não CONCLUIDAs: status={}", reserva.statusReserva());
+			throw new ValidacaoException("Não é possível avaliar reservas não CONCLUIDAs");
+		}
 
-        avaliacaoGateway.fazerAvaliacao(idReserva, notaAvaliacao, comentario);
-    }
+		avaliacaoGateway.fazerAvaliacao(idReserva, notaAvaliacao, comentario);
+	}
 }
