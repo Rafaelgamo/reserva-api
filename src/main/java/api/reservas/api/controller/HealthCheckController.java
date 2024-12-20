@@ -18,5 +18,5 @@ public class HealthCheckController {
         return ResponseEntity.ok(info);
     }
 
-    private record ApiInfo (String info, String documentacao) {}
+    public record ApiInfo (String info, String documentacao) {}
 }
